@@ -10,6 +10,8 @@ let package = Package(
             name: "sample",
             dependencies: [.Target(name: "HeliumLogger")])],
     
-    dependencies: []
+    dependencies: [
+        .Package(url: "git@github.ibm.com:ibmswift/Logger.git", majorVersion: 1),
+    ]
     
 )

@@ -1,3 +1,4 @@
+import Logger 
 import HeliumLogger
 
 Log.logger = HeliumLogger()
