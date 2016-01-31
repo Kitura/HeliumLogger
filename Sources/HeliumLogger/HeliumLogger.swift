@@ -22,7 +22,7 @@ public enum TerminalColor: String {
     case Yellow = "\u{001B}[0;33m" // yellow
 }
 
-public class HeliumLogger : Logger {
+public class HeliumLogger {
     
     /// 
     /// Singleton instance of the logger
@@ -33,6 +33,12 @@ public class HeliumLogger : Logger {
     public var details: Bool = true
     
     public init () {}
+    
+    
+
+}
+
+extension HeliumLogger : Logger {
     
     public func log(type: LoggerMessageType, msg: String,
         functionName: String, lineNum: Int, fileName: String ) {
@@ -56,10 +62,6 @@ public class HeliumLogger : Logger {
             } else {
                 print (" \(type.rawValue): \(msg)")
             }
-
             
     }
-    
-    
-    
 }
