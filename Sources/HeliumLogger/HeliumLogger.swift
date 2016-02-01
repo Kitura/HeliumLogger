@@ -20,6 +20,8 @@ public enum TerminalColor: String {
     case White = "\u{001B}[0;37m" // white
     case Red = "\u{001B}[0;31m" // red
     case Yellow = "\u{001B}[0;33m" // yellow
+    case Foreground = "\u{001B}[0;39m" // default foreground color
+    case Background = "\u{001B}[0;49m" // default background color
 }
 
 public class HeliumLogger {
@@ -54,7 +56,7 @@ extension HeliumLogger : Logger {
             }
             
             if colored && details {
-                print ("\(color.rawValue) \(type.rawValue): \(functionName) \(fileName) line \(lineNum) - \(msg) \(TerminalColor.White.rawValue)")
+                print ("\(color.rawValue) \(type.rawValue): \(functionName) \(fileName) line \(lineNum) - \(msg) \(TerminalColor.Foreground.rawValue)")
             } else if !colored && details {
                 print (" \(type.rawValue): \(functionName) \(fileName) line \(lineNum) - \(msg)")
             } else if colored && !details {
