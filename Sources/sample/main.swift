@@ -1,7 +1,6 @@
-import Logger 
 import HeliumLogger
 
-Log.logger = HeliumLogger()
+Log.logger = BasicLogger()
 
 Log.verbose("Hello World")
 
