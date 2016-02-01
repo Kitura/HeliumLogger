@@ -7,9 +7,6 @@ let package = Package(
             name: "HeliumLogger",
             dependencies: []),
         Target(
-            name: "Logger",
-            dependencies: []),
-        Target(
             name: "sample",
             dependencies: [.Target(name: "HeliumLogger")])],
     
