@@ -14,7 +14,7 @@
  * limitations under the License.
  **/
 
-import Logger
+//import Logger
 
 public enum TerminalColor: String {
     case White = "\u{001B}[0;37m" // white
