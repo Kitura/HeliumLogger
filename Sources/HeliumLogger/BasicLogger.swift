@@ -45,14 +45,14 @@ extension BasicLogger : Logger {
     public func log(type: LoggerMessageType, msg: String,
         functionName: String, lineNum: Int, fileName: String ) {
             
-            var color : TerminalColor = .White
+            var color : TerminalColor = .Foreground
             
             if type == .Warning {
                 color = .Yellow
             } else if type == .Error {
                 color = .Red
             } else {
-                color = .White
+                color = .Foreground
             }
             
             if colored && details {
