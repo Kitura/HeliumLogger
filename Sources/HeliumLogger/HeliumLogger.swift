@@ -14,7 +14,7 @@
  * limitations under the License.
  **/
 
-//import Logger
+import LoggerAPI
 
 public enum TerminalColor: String {
     case White = "\u{001B}[0;37m" // white
@@ -24,7 +24,7 @@ public enum TerminalColor: String {
     case Background = "\u{001B}[0;49m" // default background color
 }
 
-public class BasicLogger {
+public class HeliumLogger {
     
     /// 
     /// Singleton instance of the logger
@@ -40,7 +40,7 @@ public class BasicLogger {
 
 }
 
-extension BasicLogger : Logger {
+extension HeliumLogger : Logger {
     
     public func log(type: LoggerMessageType, msg: String,
         functionName: String, lineNum: Int, fileName: String ) {
