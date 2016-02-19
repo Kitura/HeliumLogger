@@ -25,9 +25,9 @@ let package = Package(
         Target(
             name: "LoggerSample",
             dependencies: [.Target(name: "HeliumLogger")])],
-    
+
     dependencies: [
-        //.Package(url: "https://github.com/IBM-Swift/LoggerAPI.git", majorVersion: 0),
-        .Package(url: "git@github.com:IBM-Swift/LoggerAPI.git", majorVersion: 0)
+        .Package(url: "https://github.com/IBM-Swift/LoggerAPI.git", majorVersion: 0),
+        //.Package(url: "git@github.com:IBM-Swift/LoggerAPI.git", majorVersion: 0)
     ]
 )
