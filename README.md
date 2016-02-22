@@ -2,15 +2,14 @@
 
 Provides a lightweight Swift Logging framework.
 
-##Features:
+## Features:
 
 - Different logging levels such as Warning, Verbose, and Error
 - Color output to terminal 
 
-##Usage:
+## Usage:
 
 ```swift
-
 import HeliumLogger
 
 Log.logger = HeliumLogger()
