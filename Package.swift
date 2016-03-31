@@ -21,10 +21,8 @@ let package = Package(
     targets: [
         Target(
             name: "HeliumLogger",
-            dependencies: []),
-        Target(
-            name: "LoggerSample",
-            dependencies: [.Target(name: "HeliumLogger")])],
+            dependencies: [])
+            ],
 
     dependencies: [
         .Package(url: "https://github.com/IBM-Swift/LoggerAPI.git", majorVersion: 0, minor: 4),
