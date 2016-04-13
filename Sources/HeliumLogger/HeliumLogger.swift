@@ -95,10 +95,18 @@ extension HeliumLogger : Logger {
                           let date = NSDate()
                           let dateFormatter = NSDateFormatter()
                           dateFormatter.dateFormat = self.dateFormat ?? HeliumLogger.defaultDateFormat
-                          replaceValue = dateFormatter.string(from: date)
+                          #if os(Linux)
+                              replaceValue = dateFormatter.stringFromDate(date)
+                          #else
+                              replaceValue = dateFormatter.string(from: date)
+                          #endif
                 }
 
-                message = message.replacingOccurrences(of: stringValue, with: replaceValue)
+                #if os(Linux)
+                    message = message.stringByReplacingOccurrencesOfString(stringValue, with: replaceValue)
+                #else
+                    message = message.replacingOccurrences(of: stringValue, with: replaceValue)
+                #endif
             }
 
             if colored {
