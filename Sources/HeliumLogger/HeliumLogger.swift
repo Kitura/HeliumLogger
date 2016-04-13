@@ -15,6 +15,7 @@
  **/
 
 import LoggerAPI
+import Foundation
 
 public enum TerminalColor: String {
     case White = "\u{001B}[0;37m" // white
@@ -31,7 +32,7 @@ public enum HeliumLoggerFormatValues: String {
     case File = "(%file)"
     case LogType = "(%t)"
 
-    static let All = [.Message, .Function, .Line, .File, .LogType]
+    static let All: [HeliumLoggerFormatValues] = [.Message, .Function, .Line, .File, .LogType]
 }
 
 public class HeliumLogger {
@@ -46,8 +47,8 @@ public class HeliumLogger {
 
     public var format: String?
 
-    private let detailedFormat = "(%t): (%func) (%file) line (%l) - (%m)"
-    private let defaultFormat = "(%t): (%m)"
+    private static let detailedFormat = "(%t): (%func) (%file) line (%l) - (%m)"
+    private static let defaultFormat = "(%t): (%m)"
 
     public init () {}
 
@@ -70,14 +71,31 @@ extension HeliumLogger : Logger {
                 color = .Foreground
             }
 
-            if colored && details {
-                print ("\(color.rawValue) \(type.rawValue): \(functionName) \(fileName) line \(lineNum) - \(msg) \(TerminalColor.Foreground.rawValue)")
-            } else if !colored && details {
-                print (" \(type.rawValue): \(functionName) \(fileName) line \(lineNum) - \(msg)")
-            } else if colored && !details {
-                print ("\(color.rawValue) \(type.rawValue): \(msg) \(TerminalColor.White.rawValue)")
+            var message: String = self.format ?? (self.details ? HeliumLogger.detailedFormat : HeliumLogger.defaultFormat)
+
+            for formatValue in HeliumLoggerFormatValues.All {
+                let stringValue = formatValue.rawValue
+                let replaceValue: String
+                switch formatValue {
+                      case .LogType:
+                          replaceValue = type.rawValue
+                      case .Message:
+                          replaceValue = msg
+                      case .Function:
+                          replaceValue = functionName
+                      case .Line:
+                          replaceValue = "\(lineNum)"
+                      case .File:
+                          replaceValue = fileName
+                }
+
+                message = message.replacingOccurrences(of: stringValue, with: replaceValue)
+            }
+
+            if colored {
+                print ("\(color.rawValue) \(message) \(TerminalColor.Foreground.rawValue)")
             } else {
-                print (" \(type.rawValue): \(msg)")
+                print (" \(message) ")
             }
 
     }
