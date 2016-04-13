@@ -61,14 +61,15 @@ extension HeliumLogger : Logger {
     public func log(type: LoggerMessageType, msg: String,
         functionName: String, lineNum: Int, fileName: String ) {
 
-            var color : TerminalColor = .Foreground
+            let color : TerminalColor// = .Foreground
 
-            if type == .Warning {
-                color = .Yellow
-            } else if type == .Error {
-                color = .Red
-            } else {
-                color = .Foreground
+            switch type {
+                case .Warning:
+                    color = .Yellow
+                case .Error:
+                    color = .Red
+                default:
+                    color = .Foreground
             }
 
             var message: String = self.format ?? (self.details ? HeliumLogger.detailedFormat : HeliumLogger.defaultFormat)
