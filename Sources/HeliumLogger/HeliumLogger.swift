@@ -103,7 +103,7 @@ extension HeliumLogger : Logger {
                 }
 
                 #if os(Linux)
-                    message = message.stringByReplacingOccurrencesOfString(stringValue, with: replaceValue)
+                    message = message.stringByReplacingOccurrencesOfString(stringValue, withString: replaceValue)
                 #else
                     message = message.replacingOccurrences(of: stringValue, with: replaceValue)
                 #endif
