@@ -24,29 +24,44 @@ public enum TerminalColor: String {
     case Background = "\u{001B}[0;49m" // default background color
 }
 
+public enum HeliumLoggerFormatValues: String {
+    case Message = "(%m)"
+    case Function = "(%func)"
+    case Line = "(%l)"
+    case File = "(%file)"
+    case LogType = "(%t)"
+
+    static let All = [.Message, .Function, .Line, .File, .LogType]
+}
+
 public class HeliumLogger {
-    
-    /// 
+
+    ///
     /// Singleton instance of the logger
     // static public var logger: Logger?
-    
+
     public var colored: Bool = true
-    
+
     public var details: Bool = true
-    
+
+    public var format: String?
+
+    private let detailedFormat = "(%t): (%func) (%file) line (%l) - (%m)"
+    private let defaultFormat = "(%t): (%m)"
+
     public init () {}
-    
-    
+
+
 
 }
 
 extension HeliumLogger : Logger {
-    
+
     public func log(type: LoggerMessageType, msg: String,
         functionName: String, lineNum: Int, fileName: String ) {
-            
+
             var color : TerminalColor = .Foreground
-            
+
             if type == .Warning {
                 color = .Yellow
             } else if type == .Error {
@@ -54,7 +69,7 @@ extension HeliumLogger : Logger {
             } else {
                 color = .Foreground
             }
-            
+
             if colored && details {
                 print ("\(color.rawValue) \(type.rawValue): \(functionName) \(fileName) line \(lineNum) - \(msg) \(TerminalColor.Foreground.rawValue)")
             } else if !colored && details {
@@ -64,6 +79,6 @@ extension HeliumLogger : Logger {
             } else {
                 print (" \(type.rawValue): \(msg)")
             }
-            
+
     }
 }
