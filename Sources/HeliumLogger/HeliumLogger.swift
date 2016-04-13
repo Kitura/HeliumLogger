@@ -26,13 +26,16 @@ public enum TerminalColor: String {
 }
 
 public enum HeliumLoggerFormatValues: String {
-    case Message = "(%m)"
+    case Message = "(%msg)"
     case Function = "(%func)"
-    case Line = "(%l)"
+    case Line = "(%line)"
     case File = "(%file)"
-    case LogType = "(%t)"
+    case LogType = "(%type)"
+    case Date = "(%date)"
 
-    static let All: [HeliumLoggerFormatValues] = [.Message, .Function, .Line, .File, .LogType]
+    static let All: [HeliumLoggerFormatValues] = [
+        .Message, .Function, .Line, .File, .LogType, .Date
+    ]
 }
 
 public class HeliumLogger {
@@ -46,14 +49,13 @@ public class HeliumLogger {
     public var details: Bool = true
 
     public var format: String?
+    public var dateFormat: String?
 
-    private static let detailedFormat = "(%t): (%func) (%file) line (%l) - (%m)"
-    private static let defaultFormat = "(%t): (%m)"
+    private static let detailedFormat = "(%type): (%func) (%file) line (%line) - (%msg)"
+    private static let defaultFormat = "(%type): (%msg)"
+    private static let defaultDateFormat = "dd.MM.YYYY, HH:mm:ss"
 
     public init () {}
-
-
-
 }
 
 extension HeliumLogger : Logger {
@@ -61,7 +63,7 @@ extension HeliumLogger : Logger {
     public func log(type: LoggerMessageType, msg: String,
         functionName: String, lineNum: Int, fileName: String ) {
 
-            let color : TerminalColor// = .Foreground
+            let color : TerminalColor
 
             switch type {
                 case .Warning:
@@ -87,7 +89,13 @@ extension HeliumLogger : Logger {
                       case .Line:
                           replaceValue = "\(lineNum)"
                       case .File:
-                          replaceValue = fileName
+                          let fileNameUrl = NSURL(string: fileName)
+                          replaceValue = fileNameUrl?.lastPathComponent ?? fileName
+                      case .Date:
+                          let date = NSDate()
+                          let dateFormatter = NSDateFormatter()
+                          dateFormatter.dateFormat = self.dateFormat ?? HeliumLogger.defaultDateFormat
+                          replaceValue = dateFormatter.string(from: date)
                 }
 
                 message = message.replacingOccurrences(of: stringValue, with: replaceValue)
@@ -98,6 +106,5 @@ extension HeliumLogger : Logger {
             } else {
                 print (" \(message) ")
             }
-
     }
 }
