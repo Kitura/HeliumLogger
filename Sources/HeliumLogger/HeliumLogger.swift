@@ -15,6 +15,7 @@
  **/
 
 import LoggerAPI
+import Foundation
 
 public enum TerminalColor: String {
     case White = "\u{001B}[0;37m" // white
@@ -24,46 +25,94 @@ public enum TerminalColor: String {
     case Background = "\u{001B}[0;49m" // default background color
 }
 
+public enum HeliumLoggerFormatValues: String {
+    case Message = "(%msg)"
+    case Function = "(%func)"
+    case Line = "(%line)"
+    case File = "(%file)"
+    case LogType = "(%type)"
+    case Date = "(%date)"
+
+    static let All: [HeliumLoggerFormatValues] = [
+        .Message, .Function, .Line, .File, .LogType, .Date
+    ]
+}
+
 public class HeliumLogger {
-    
-    /// 
+
+    ///
     /// Singleton instance of the logger
     // static public var logger: Logger?
-    
-    public var colored: Bool = true
-    
-    public var details: Bool = true
-    
-    public init () {}
-    
-    
 
+    public var colored: Bool = true
+
+    public var details: Bool = true
+
+    public var format: String?
+    public var dateFormat: String?
+
+    private static let detailedFormat = "(%type): (%func) (%file) line (%line) - (%msg)"
+    private static let defaultFormat = "(%type): (%msg)"
+    private static let defaultDateFormat = "dd.MM.YYYY, HH:mm:ss"
+
+    public init () {}
 }
 
 extension HeliumLogger : Logger {
-    
+
     public func log(type: LoggerMessageType, msg: String,
         functionName: String, lineNum: Int, fileName: String ) {
-            
-            var color : TerminalColor = .Foreground
-            
-            if type == .Warning {
-                color = .Yellow
-            } else if type == .Error {
-                color = .Red
-            } else {
-                color = .Foreground
+
+            let color : TerminalColor
+
+            switch type {
+                case .Warning:
+                    color = .Yellow
+                case .Error:
+                    color = .Red
+                default:
+                    color = .Foreground
             }
-            
-            if colored && details {
-                print ("\(color.rawValue) \(type.rawValue): \(functionName) \(fileName) line \(lineNum) - \(msg) \(TerminalColor.Foreground.rawValue)")
-            } else if !colored && details {
-                print (" \(type.rawValue): \(functionName) \(fileName) line \(lineNum) - \(msg)")
-            } else if colored && !details {
-                print ("\(color.rawValue) \(type.rawValue): \(msg) \(TerminalColor.White.rawValue)")
-            } else {
-                print (" \(type.rawValue): \(msg)")
+
+            var message: String = self.format ?? (self.details ? HeliumLogger.detailedFormat : HeliumLogger.defaultFormat)
+
+            for formatValue in HeliumLoggerFormatValues.All {
+                let stringValue = formatValue.rawValue
+                let replaceValue: String
+                switch formatValue {
+                      case .LogType:
+                          replaceValue = type.rawValue
+                      case .Message:
+                          replaceValue = msg
+                      case .Function:
+                          replaceValue = functionName
+                      case .Line:
+                          replaceValue = "\(lineNum)"
+                      case .File:
+                          let fileNameUrl = NSURL(string: fileName)
+                          replaceValue = fileNameUrl?.lastPathComponent ?? fileName
+                      case .Date:
+                          let date = NSDate()
+                          let dateFormatter = NSDateFormatter()
+                          dateFormatter.dateFormat = self.dateFormat ?? HeliumLogger.defaultDateFormat
+                          #if os(Linux)
+                              replaceValue = dateFormatter.stringFromDate(date)
+                          #else
+                              replaceValue = dateFormatter.string(from: date)
+                          #endif
+                }
+
+                #if os(Linux)
+                    message = message.stringByReplacingOccurrencesOfString(stringValue, withString: replaceValue)
+                #else
+                    message = message.replacingOccurrences(of: stringValue, with: replaceValue)
+                #endif
             }
-            
+
+            if colored {
+                print ("\(color.rawValue) \(message) \(TerminalColor.Foreground.rawValue)")
+            } else {
+                print (" \(message) ")
+            }
     }
 }
