@@ -1,0 +1,8 @@
+
+before_install:
+  - wget https://swift.org/builds/development/ubuntu1404/swift-DEVELOPMENT-SNAPSHOT-2016-04-12-a/swift-DEVELOPMENT-SNAPSHOT-2016-04-12-a-ubuntu14.04.tar.gz
+  - tar xzvf swift-DEVELOPMENT-SNAPSHOT-2016-04-12-a-ubuntu14.04.tar.gz
+  
+script:
+  - swift-DEVELOPMENT-SNAPSHOT-2016-04-12-a-ubuntu14.04/usr/bin/swift build 
+  - swift-DEVELOPMENT-SNAPSHOT-2016-04-12-a-ubuntu14.04/usr/bin/swift test
