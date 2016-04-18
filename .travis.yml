@@ -13,7 +13,7 @@ before_install:
 script:
   - swift build 
   - swift build -X
-  - xcodebuild clean build test TOOLCHAINS=swift -scheme HeliumLogger -project HeliumLogger.xcodeproj -enableCodeCoverage YES build test -destination 'platform=OS X,arch=x86_64'
+  - xcodebuild clean build test TOOLCHAINS=swift -scheme HeliumLogger -project HeliumLogger.xcodeproj -destination 'platform=OS X,arch=x86_64' -enableCodeCoverage YES
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
