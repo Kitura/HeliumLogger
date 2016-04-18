@@ -1,5 +1,7 @@
 # HeliumLogger
 
+[![Build Status](https://travis-ci.org/IBM-Swift/HeliumLogger.svg?branch=master)](https://travis-ci.org/IBM-Swift/HeliumLogger)
+
 Provides a lightweight Swift Logging framework.
 
 ## Features:
