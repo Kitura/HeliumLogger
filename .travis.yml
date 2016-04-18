@@ -13,7 +13,7 @@ before_install:
 script:
   - swift build 
   - swift build -X
-  - xcodebuild TOOLCHAINS=swift -scheme HeliumLogger -project HeliumLogger.xcodeproj build test -sdk iphonesimulator GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES
+  - xcodebuild TOOLCHAINS=swift -scheme HeliumLogger -project HeliumLogger.xcodeproj build test -destination 'platform=OS X,arch=x86_64' GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES
   - swift test
 
 after_success:
