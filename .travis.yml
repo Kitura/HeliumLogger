@@ -15,7 +15,7 @@ script:
   - swift build 
   - swift build -X
   - gsed -i 's/shouldUseLaunchSchemeArgsEnv = "YES">/shouldUseLaunchSchemeArgsEnv = "YES" codeCoverageEnabled = "YES">/g' HeliumLogger.xcodeproj/xcshareddata/xcschemes/HeliumLogger.xcscheme
-  - xcodebuild clean build test ARCHS="x86_64" VALID_ARCHS="x86_64" TOOLCHAINS=swift -scheme HeliumLogger -enableCodeCoverage=YES -destination 'platform=OS X,arch=x86_64' GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES
+  - xcodebuild clean build test ARCHS="x86_64" VALID_ARCHS="x86_64" TOOLCHAINS=swift -scheme HeliumLogger -enableCodeCoverage=YES GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES
   
   after_success:
     - bash <(curl -s https://codecov.io/bash)
