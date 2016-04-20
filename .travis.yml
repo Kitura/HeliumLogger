@@ -18,4 +18,4 @@ script:
   - xcodebuild clean build test ARCHS="x86_64" VALID_ARCHS="x86_64" TOOLCHAINS=swift -scheme HeliumLogger -enableCodeCoverage=YES
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -J 'HeliumLogger'
+  - bash <(curl -s https://codecov.io/bash)
