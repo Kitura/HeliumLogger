@@ -60,7 +60,7 @@ public class HeliumLogger {
 
 extension HeliumLogger : Logger {
 
-    public func log(type: LoggerMessageType, msg: String,
+    public func log(_ type: LoggerMessageType, msg: String,
         functionName: String, lineNum: Int, fileName: String ) {
 
             let color : TerminalColor
