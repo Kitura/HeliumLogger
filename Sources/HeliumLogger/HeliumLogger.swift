@@ -95,11 +95,7 @@ extension HeliumLogger : Logger {
                           let date = NSDate()
                           let dateFormatter = NSDateFormatter()
                           dateFormatter.dateFormat = self.dateFormat ?? HeliumLogger.defaultDateFormat
-                          #if os(Linux)
-                              replaceValue = dateFormatter.stringFromDate(date)
-                          #else
-                              replaceValue = dateFormatter.string(from: date)
-                          #endif
+                          replaceValue = dateFormatter.string(from: date)
                 }
 
                 #if os(Linux)
