@@ -98,11 +98,7 @@ extension HeliumLogger : Logger {
                           replaceValue = dateFormatter.string(from: date)
                 }
 
-                #if os(Linux)
-                    message = message.stringByReplacingOccurrencesOfString(stringValue, withString: replaceValue)
-                #else
-                    message = message.replacingOccurrences(of: stringValue, with: replaceValue)
-                #endif
+                message = message.replacingOccurrences(of: stringValue, with: replaceValue)
             }
 
             if colored {
