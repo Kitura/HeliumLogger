@@ -27,32 +27,42 @@ import XCTest
 #endif
 
 class TestLogger : XCTestCase {
-    
+
     static var allTests : [(String, TestLogger -> () throws -> Void)] {
         return [
                    ("testInfo", testInfo),
                    ("testWarning", testWarning),
                    ("testError", testError),
+                   ("testLoggingLevels", testLoggingLevels),
         ]
     }
-    
-    
+
+
     func testInfo() {
         Log.logger = HeliumLogger()
         Log.info("This is an error")
-        
+
     }
-    
+
     func testWarning() {
         Log.logger = HeliumLogger()
         Log.warning("This is an error")
-        
+
     }
-    
+
     func testError() {
         Log.logger = HeliumLogger()
         Log.error("This is an error")
-        
+
     }
-    
+
+    func testLoggingLevels() {
+      let logger = HeliumLogger()
+      logger.filterLevel = .error
+      Log.logger = logger
+
+      Log.error("This is an error")
+      Log.warning("This is an error")
+    }
+
 }
