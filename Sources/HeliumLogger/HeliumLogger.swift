@@ -18,23 +18,23 @@ import LoggerAPI
 import Foundation
 
 public enum TerminalColor: String {
-    case White = "\u{001B}[0;37m" // white
-    case Red = "\u{001B}[0;31m" // red
-    case Yellow = "\u{001B}[0;33m" // yellow
-    case Foreground = "\u{001B}[0;39m" // default foreground color
-    case Background = "\u{001B}[0;49m" // default background color
+    case white = "\u{001B}[0;37m" // white
+    case red = "\u{001B}[0;31m" // red
+    case yellow = "\u{001B}[0;33m" // yellow
+    case foreground = "\u{001B}[0;39m" // default foreground color
+    case background = "\u{001B}[0;49m" // default background color
 }
 
 public enum HeliumLoggerFormatValues: String {
-    case Message = "(%msg)"
-    case Function = "(%func)"
-    case Line = "(%line)"
-    case File = "(%file)"
-    case LogType = "(%type)"
-    case Date = "(%date)"
+    case message = "(%msg)"
+    case function = "(%func)"
+    case line = "(%line)"
+    case file = "(%file)"
+    case logType = "(%type)"
+    case date = "(%date)"
 
     static let All: [HeliumLoggerFormatValues] = [
-        .Message, .Function, .Line, .File, .LogType, .Date
+        .message, .function, .line, .file, .logType, .date
     ]
 }
 
@@ -66,12 +66,12 @@ extension HeliumLogger : Logger {
             let color : TerminalColor
 
             switch type {
-                case .Warning:
-                    color = .Yellow
-                case .Error:
-                    color = .Red
+                case .warning:
+                    color = .yellow
+                case .error:
+                    color = .red
                 default:
-                    color = .Foreground
+                    color = .foreground
             }
 
             var message: String = self.format ?? (self.details ? HeliumLogger.detailedFormat : HeliumLogger.defaultFormat)
@@ -80,18 +80,18 @@ extension HeliumLogger : Logger {
                 let stringValue = formatValue.rawValue
                 let replaceValue: String
                 switch formatValue {
-                      case .LogType:
+                      case .logType:
                           replaceValue = type.rawValue
-                      case .Message:
+                      case .message:
                           replaceValue = msg
-                      case .Function:
+                      case .function:
                           replaceValue = functionName
-                      case .Line:
+                      case .line:
                           replaceValue = "\(lineNum)"
-                      case .File:
+                      case .file:
                           let fileNameUrl = NSURL(string: fileName)
                           replaceValue = fileNameUrl?.lastPathComponent ?? fileName
-                      case .Date:
+                      case .date:
                           let date = NSDate()
                           let dateFormatter = NSDateFormatter()
                           dateFormatter.dateFormat = self.dateFormat ?? HeliumLogger.defaultDateFormat
@@ -102,7 +102,7 @@ extension HeliumLogger : Logger {
             }
 
             if colored {
-                print ("\(color.rawValue) \(message) \(TerminalColor.Foreground.rawValue)")
+                print ("\(color.rawValue) \(message) \(TerminalColor.foreground.rawValue)")
             } else {
                 print (" \(message) ")
             }
