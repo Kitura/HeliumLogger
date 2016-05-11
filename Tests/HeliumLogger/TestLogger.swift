@@ -33,6 +33,7 @@ class TestLogger : XCTestCase {
                    ("testInfo", testInfo),
                    ("testWarning", testWarning),
                    ("testError", testError),
+                   ("testLoggingLevels", testLoggingLevels),
         ]
     }
 
