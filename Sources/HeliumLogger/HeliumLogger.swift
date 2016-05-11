@@ -38,6 +38,32 @@ public enum HeliumLoggerFormatValues: String {
     ]
 }
 
+public enum HelliumLoggerFilterLevel: Int {
+    case all = 0
+    case info = 1
+    case debug = 2
+    case warning = 3
+    case error = 4
+}
+
+extension LoggerMessageType {
+
+    var filterValue: Int {
+        switch self {
+            case .info:
+              return 1
+            case .debug:
+              return 2
+            case .warning:
+              return 3
+            case .error:
+              return 4
+            default:
+              return 0
+        }
+    }
+}
+
 public class HeliumLogger {
 
     ///
@@ -45,6 +71,8 @@ public class HeliumLogger {
     // static public var logger: Logger?
 
     public var colored: Bool = true
+
+    public var filterLevel: HelliumLoggerFilterLevel = .all
 
     public var details: Bool = true
 
@@ -62,6 +90,10 @@ extension HeliumLogger : Logger {
 
     public func log(_ type: LoggerMessageType, msg: String,
         functionName: String, lineNum: Int, fileName: String ) {
+
+            guard type.filterValue >= self.filterLevel.rawValue else {
+                return
+            }
 
             let color : TerminalColor
 
