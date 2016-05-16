@@ -58,10 +58,10 @@ class TestLogger : XCTestCase {
     
     func testLevel() {
         Log.logger = HeliumLogger(.warning)
-        Log.verbose("This is an verbose")
+        Log.verbose("This is a verbose")
         Log.info("This is an info")
-        Log.debug("This is an debug")
-        Log.warning("This is an warning")
+        Log.debug("This is a debug")
+        Log.warning("This is a warning")
         Log.error("This is an error")
         
     }
