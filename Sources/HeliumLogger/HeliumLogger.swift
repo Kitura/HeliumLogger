@@ -56,6 +56,11 @@ public class HeliumLogger {
     private static let defaultDateFormat = "dd.MM.YYYY, HH:mm:ss"
 
     public init () {}
+    
+    private var type: LoggerMessageType = .verbose
+    public init (_ type: LoggerMessageType) {
+        self.type = type
+    }
 }
 
 extension HeliumLogger : Logger {
@@ -101,10 +106,12 @@ extension HeliumLogger : Logger {
                 message = message.replacingOccurrences(of: stringValue, with: replaceValue)
             }
 
-            if colored {
-                print ("\(color.rawValue) \(message) \(TerminalColor.foreground.rawValue)")
-            } else {
-                print (" \(message) ")
-            }
+            if type.logValue() >= self.type.logValue() {
+                if colored {
+                    print ("\(color.rawValue) \(message) \(TerminalColor.foreground.rawValue)")
+                } else {
+                    print (" \(message) ")
+                }
+        }
     }
 }
