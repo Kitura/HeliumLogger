@@ -55,7 +55,11 @@ public class HeliumLogger {
     private static let defaultFormat = "(%type): (%msg)"
     private static let defaultDateFormat = "dd.MM.YYYY, HH:mm:ss"
 
-    public init () {}
+    public init() {}
+
+    public static func use() {
+        Log.logger = HeliumLogger()
+    }
     
     private var type: LoggerMessageType = .verbose
     public init (_ type: LoggerMessageType) {
