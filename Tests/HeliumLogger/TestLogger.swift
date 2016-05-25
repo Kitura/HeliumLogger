@@ -28,7 +28,7 @@ import XCTest
 
 class TestLogger : XCTestCase {
     
-    static var allTests : [(String, TestLogger -> () throws -> Void)] {
+    static var allTests : [(String, (TestLogger) -> () throws -> Void)] {
         return [
                    ("testInfo", testInfo),
                    ("testWarning", testWarning),
