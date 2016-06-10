@@ -44,7 +44,7 @@ public class HeliumLogger {
     /// Singleton instance of the logger
     // static public var logger: Logger?
 
-    public var colored: Bool = true
+    public var colored: Bool = false
 
     public var details: Bool = true
 
