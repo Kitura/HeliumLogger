@@ -13,6 +13,7 @@ Provides a lightweight Swift Logging framework.
 
 ```swift
 import HeliumLogger
+import LoggerAPI
 
 Log.logger = HeliumLogger()
 
