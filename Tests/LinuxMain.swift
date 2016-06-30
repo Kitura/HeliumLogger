@@ -16,7 +16,7 @@
 
 import XCTest
 
-@testable import KituraTestSuite
+@testable import HeliumLoggerTestSuite
 
 XCTMain([
             testCase(TestLogger.allTests),
