@@ -6,8 +6,8 @@ cache:
     - /Library/Developer/Toolchains
 
 before_install:
-  - wget https://swift.org/builds/development/xcode/swift-DEVELOPMENT-SNAPSHOT-2016-04-25-a/swift-DEVELOPMENT-SNAPSHOT-2016-04-25-a-osx.pkg
-  - sudo installer -pkg swift-DEVELOPMENT-SNAPSHOT-2016-04-25-a-osx.pkg -target /
+  - wget https://swift.org/builds/development/xcode/swift-DEVELOPMENT-SNAPSHOT-2016-06-06-a/swift-DEVELOPMENT-SNAPSHOT-2016-06-06-a-osx.pkg
+  - sudo installer -pkg swift-DEVELOPMENT-SNAPSHOT-2016-06-06-a-osx.pkg -target /
   - export PATH=/Library/Developer/Toolchains/swift-latest.xctoolchain/usr/bin:"${PATH}"
   
 script:
