@@ -59,6 +59,7 @@ public class HeliumLogger {
 
     public static func use() {
         Log.logger = HeliumLogger()
+        setbuf(stdout, nil)
     }
     
     private var type: LoggerMessageType = .verbose
