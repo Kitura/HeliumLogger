@@ -102,8 +102,13 @@ extension HeliumLogger : Logger {
                           let fileNameUrl = NSURL(string: fileName)
                           replaceValue = fileNameUrl?.lastPathComponent ?? fileName
                       case .date:
-                          let date = NSDate()
-                          let dateFormatter = NSDateFormatter()
+                          #if os(Linux)
+                            let date = NSDate()
+                            let dateFormatter = NSDateFormatter()
+                          #else
+                            let date = Date()
+                            let dateFormatter = DateFormatter()
+                          #endif
                           dateFormatter.dateFormat = self.dateFormat ?? HeliumLogger.defaultDateFormat
                           replaceValue = dateFormatter.string(from: date)
                 }
