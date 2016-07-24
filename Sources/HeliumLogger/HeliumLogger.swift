@@ -91,7 +91,7 @@ extension HeliumLogger : Logger {
                 let replaceValue: String
                 switch formatValue {
                       case .logType:
-                          replaceValue = type.rawValue
+                          replaceValue = type.description
                       case .message:
                           replaceValue = msg
                       case .function:
@@ -116,7 +116,7 @@ extension HeliumLogger : Logger {
                 message = message.replacingOccurrences(of: stringValue, with: replaceValue)
             }
 
-            if type.logValue() >= self.type.logValue() {
+            if type.rawValue >= self.type.rawValue {
                 if colored {
                     print ("\(color.rawValue) \(message) \(TerminalColor.foreground.rawValue)")
                 } else {
