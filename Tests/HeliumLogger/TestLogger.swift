@@ -40,13 +40,13 @@ class TestLogger : XCTestCase {
     
     func testInfo() {
         Log.logger = HeliumLogger()
-        Log.info("This is an error")
+        Log.info("This is an info")
         
     }
     
     func testWarning() {
         Log.logger = HeliumLogger()
-        Log.warning("This is an error")
+        Log.warning("This is a warning")
         
     }
     
