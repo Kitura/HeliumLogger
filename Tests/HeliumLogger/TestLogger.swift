@@ -30,10 +30,12 @@ class TestLogger : XCTestCase {
     
     static var allTests : [(String, (TestLogger) -> () throws -> Void)] {
         return [
-                   ("testInfo", testInfo),
-                   ("testWarning", testWarning),
-                   ("testError", testError),
-                   ("testLevel", testLevel),
+                    ("testInfo", testInfo),
+                    ("testWarning", testWarning),
+                    ("testError", testError),
+                    ("testLevel", testLevel),
+                    ("testEntry", testEntry),
+                    ("testExit", testExit),
         ]
     }
     
@@ -56,8 +58,23 @@ class TestLogger : XCTestCase {
         
     }
     
+    func testEntry() {
+        Log.logger = HeliumLogger()
+        Log.entry("This is an entry")
+        
+    }
+    
+    func testExit() {
+        Log.logger = HeliumLogger()
+        Log.exit("This is an exit")
+        
+    }
+    
     func testLevel() {
         Log.logger = HeliumLogger(.warning)
+        if(Log.isLogging(.warning)) {
+            Log.warning("This is a warning")
+        }
         Log.verbose("This is a verbose")
         Log.info("This is an info")
         Log.debug("This is a debug")
