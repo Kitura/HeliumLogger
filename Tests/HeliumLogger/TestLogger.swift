@@ -72,9 +72,10 @@ class TestLogger : XCTestCase {
     
     func testLevel() {
         Log.logger = HeliumLogger(.warning)
-        if(Log.isLogging(.warning)) {
-            Log.warning("This is a warning")
-        }
+
+        XCTAssertTrue(Log.isLogging(.error))
+        XCTAssertFalse(Log.isLogging(.entry))
+
         Log.verbose("This is a verbose")
         Log.info("This is an info")
         Log.debug("This is a debug")

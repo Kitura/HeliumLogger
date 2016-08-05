@@ -126,6 +126,6 @@ extension HeliumLogger : Logger {
     }
     
     public func isLogging(_ type: LoggerMessageType) -> Bool {
-        return self.type.rawValue == type.rawValue
+        return type.rawValue >= self.type.rawValue
     }
 }
