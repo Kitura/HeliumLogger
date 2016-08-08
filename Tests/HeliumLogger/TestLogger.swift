@@ -36,6 +36,7 @@ class TestLogger : XCTestCase {
                     ("testLevel", testLevel),
                     ("testEntry", testEntry),
                     ("testExit", testExit),
+                    ("testIsLogging", testIsLogging),
         ]
     }
     
@@ -59,13 +60,13 @@ class TestLogger : XCTestCase {
     }
     
     func testEntry() {
-        Log.logger = HeliumLogger()
+        Log.logger = HeliumLogger(.entry)
         Log.entry("This is an entry")
         
     }
     
     func testExit() {
-        Log.logger = HeliumLogger()
+        Log.logger = HeliumLogger(.exit)
         Log.exit("This is an exit")
         
     }
@@ -73,15 +74,29 @@ class TestLogger : XCTestCase {
     func testLevel() {
         Log.logger = HeliumLogger(.warning)
 
-        XCTAssertTrue(Log.isLogging(.error))
-        XCTAssertFalse(Log.isLogging(.entry))
-
         Log.verbose("This is a verbose")
         Log.info("This is an info")
         Log.debug("This is a debug")
         Log.warning("This is a warning")
         Log.error("This is an error")
-        
+    }
+
+    func testIsLogging () {
+        Log.logger = HeliumLogger()
+        XCTAssertTrue(Log.isLogging(.verbose))
+        XCTAssertTrue(Log.isLogging(.error))
+        XCTAssertFalse(Log.isLogging(.debug))
+        XCTAssertFalse(Log.isLogging(.entry))
+
+        Log.logger = HeliumLogger(.entry)
+        XCTAssertTrue(Log.isLogging(.error))
+        XCTAssertTrue(Log.isLogging(.verbose))
+        XCTAssertTrue(Log.isLogging(.entry))
+
+        Log.logger = HeliumLogger(.error)
+        XCTAssertTrue(Log.isLogging(.error))
+        XCTAssertFalse(Log.isLogging(.warning))
+        XCTAssertFalse(Log.isLogging(.entry))
     }
     
 }
