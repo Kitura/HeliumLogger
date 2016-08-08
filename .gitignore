@@ -2,3 +2,4 @@
 Packages
 build
 HeliumLogger.xcodeproj
+*.DS_Store

@@ -124,4 +124,8 @@ extension HeliumLogger : Logger {
                 }
         }
     }
+    
+    public func isLogging(_ type: LoggerMessageType) -> Bool {
+        return type.rawValue >= self.type.rawValue
+    }
 }
