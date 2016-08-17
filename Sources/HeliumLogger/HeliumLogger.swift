@@ -51,9 +51,9 @@ public class HeliumLogger {
     public var format: String?
     public var dateFormat: String?
 
-    private static let detailedFormat = "(%type): (%func) (%file) line (%line) - (%msg)"
-    private static let defaultFormat = "(%type): (%msg)"
-    private static let defaultDateFormat = "dd.MM.YYYY, HH:mm:ss"
+    fileprivate static let detailedFormat = "(%type): (%func) (%file) line (%line) - (%msg)"
+    fileprivate static let defaultFormat = "(%type): (%msg)"
+    fileprivate static let defaultDateFormat = "dd.MM.YYYY, HH:mm:ss"
 
     public init() {}
 
@@ -62,7 +62,7 @@ public class HeliumLogger {
         setbuf(stdout, nil)
     }
     
-    private var type: LoggerMessageType = .verbose
+    fileprivate var type: LoggerMessageType = .verbose
     public init (_ type: LoggerMessageType) {
         self.type = type
     }
