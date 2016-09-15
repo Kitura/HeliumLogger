@@ -1,0 +1,15 @@
+module: HeliumLogger
+author: IBM
+github_url: https://github.com/IBM-Swift/HeliumLogger/
+
+theme: fullwidth
+clean: true
+exclude: [Packages]
+
+readme: README.md
+
+skip_undocumented: false
+hide_documentation_coverage: false
+
+xcodebuild_arguments: [-project, HeliumLogger.xcodeproj, -target, HeliumLogger, -toolchain, org.swift.3020160823a, LIBRARY_SEARCH_PATHS=.build/debug]
+
