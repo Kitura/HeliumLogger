@@ -77,8 +77,10 @@ public class HeliumLogger {
 
     /// Create a `HeliumLogger` instance and set it up as the logger used by the `LoggerAPI`
     /// protocol.
-    public static func use() {
-        Log.logger = HeliumLogger()
+    /// - Parameter type: The most detailed message type (`LoggerMessageType`) to see in the
+    ///                  output of the logger. Defaults to `verbose`.
+    public static func use(_ type: LoggerMessageType = .verbose) {
+        Log.logger = HeliumLogger(type)
         setbuf(stdout, nil)
     }
     
