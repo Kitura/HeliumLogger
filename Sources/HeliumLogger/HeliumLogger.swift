@@ -61,16 +61,56 @@ public class HeliumLogger {
     /// If true, use the detailed format when a user logging format wasn't specified.
     public var details: Bool = true
 
-    /// If not nil, specifies the user specified logging format.
-    public var format: String?
-    
-    /// If not nil, specifies the format used when adding the date and the time to the
-    /// logged messages
-    public var dateFormat: String?
+    /// If true, use the full file path, not just the filename.
+    public var fullFilePath: Bool = false
 
-    fileprivate static let detailedFormat = "(%type): (%func) (%file) line (%line) - (%msg)"
-    fileprivate static let defaultFormat = "(%type): (%msg)"
-    fileprivate static let defaultDateFormat = "dd.MM.YYYY, HH:mm:ss"
+    /// If not nil, specifies the user specified logging format.
+    /// Use `formatter` closure for more efficient logging
+    /// `formatter` is used in preference to `format` if both are set
+    public var format: String?
+
+    /// If not nil, specifies the user specified formatting closure
+    /// This is much more efficient that using `format` and is used in preference to that if both are set
+    /// For example:
+    /// logger.formatter = { (date: String, type: LoggerMessageType, file: String, line: Int, function: String, msg: String) in
+    ///     return "\(date) \(type) \(file) \(line) \(function): \(msg)"
+    /// }
+    public var formatter: (((date: String, type: LoggerMessageType, file: String, line: Int, function: String, msg: String)) -> String)?
+
+    /// If not nil, specifies the date time format
+    public var dateFormat: String? {
+        didSet {
+            dateFormatter = HeliumLogger.getDateFormatter(format: dateFormat, timeZone: timeZone)
+        }
+    }
+
+    /// If not nil, specifies the timezone used in the date time format
+    public var timeZone: TimeZone? {
+        didSet {
+            dateFormatter = HeliumLogger.getDateFormatter(format: dateFormat, timeZone: timeZone)
+        }
+    }
+
+    /// default date format - ISO 8601
+    public static let defaultDateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+
+    fileprivate var dateFormatter: DateFormatter = HeliumLogger.getDateFormatter()
+
+    private static func getDateFormatter(format: String? = nil, timeZone: TimeZone? = nil) -> DateFormatter {
+        let formatter = DateFormatter()
+
+        if let dateFormat = format {
+            formatter.dateFormat = dateFormat
+        } else {
+            formatter.dateFormat = defaultDateFormat
+        }
+
+        if let timeZone = timeZone {
+            formatter.timeZone = timeZone
+        }
+
+        return formatter
+    }
 
     /// Create a `HeliumLogger` instance
     public init() {}
@@ -110,53 +150,69 @@ extension HeliumLogger : Logger {
     public func log(_ type: LoggerMessageType, msg: String,
         functionName: String, lineNum: Int, fileName: String ) {
 
-            let color : TerminalColor
+        guard type.rawValue >= self.type.rawValue else {
+            return
+        }
 
-            switch type {
-                case .warning:
-                    color = .yellow
-                case .error:
-                    color = .red
-                default:
-                    color = .foreground
-            }
+        let date = dateFormatter.string(from: Date())
+        var message: String
 
-            var message: String = self.format ?? (self.details ? HeliumLogger.detailedFormat : HeliumLogger.defaultFormat)
-
+        if let formatter = self.formatter {
+            message = formatter((date: date, type: type, file: getFile(fileName), line: lineNum, function: functionName, msg: msg))
+        } else if let format = self.format {
+            message = format
             for formatValue in HeliumLoggerFormatValues.All {
                 let stringValue = formatValue.rawValue
                 let replaceValue: String
                 switch formatValue {
-                      case .logType:
-                          replaceValue = type.description
-                      case .message:
-                          replaceValue = msg
-                      case .function:
-                          replaceValue = functionName
-                      case .line:
-                          replaceValue = "\(lineNum)"
-                      case .file:
-                          let fileNameUrl = NSURL(string: fileName)
-                          replaceValue = fileNameUrl?.lastPathComponent ?? fileName
-                      case .date:
-                          let date = Date()
-                          let dateFormatter = DateFormatter()
-                          dateFormatter.dateFormat = self.dateFormat ?? HeliumLogger.defaultDateFormat
-                          replaceValue = dateFormatter.string(from: date)
+                    case .logType:
+                        replaceValue = type.description
+                    case .message:
+                        replaceValue = msg
+                    case .function:
+                        replaceValue = functionName
+                    case .line:
+                        replaceValue = "\(lineNum)"
+                    case .file:
+                        replaceValue = getFile(fileName)
+                    case .date:
+                        replaceValue = date
                 }
-
                 message = message.replacingOccurrences(of: stringValue, with: replaceValue)
             }
+        } else if details {
+            message = "\(date) \(type) \(getFile(fileName)) line \(lineNum) \(functionName) - \(msg)"
+        } else {
+            message = "\(date) \(type) - \(msg)"
+        }
 
-            if type.rawValue >= self.type.rawValue {
-                if colored {
-                    print ("\(color.rawValue) \(message) \(TerminalColor.foreground.rawValue)")
-                } else {
-                    print (" \(message) ")
-                }
+        if colored {
+            let color : TerminalColor
+            switch type {
+            case .warning:
+                color = .yellow
+            case .error:
+                color = .red
+            default:
+                color = .foreground
+            }
+
+            print(color.rawValue + message + TerminalColor.foreground.rawValue)
+        } else {
+            print(message)
         }
     }
-    
+
+    private func getFile(_ path: String) -> String {
+        if self.fullFilePath {
+            return path
+        }
+        guard let range = path.range(of: "/", options: .backwards) else {
+            return path
+        }
+        return path.substring(from: range.upperBound)
+    }
+
     /// A function that will indicate if a message with a specified type (`LoggerMessageType`)
     /// will be outputed in the log (i.e. will not be filtered out).
     ///
