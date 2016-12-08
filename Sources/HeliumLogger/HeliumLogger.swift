@@ -65,17 +65,16 @@ public class HeliumLogger {
     public var fullFilePath: Bool = false
 
     /// If not nil, specifies the user specified logging format.
-    /// Use `formatter` closure for more efficient logging
-    /// `formatter` is used in preference to `format` if both are set
-    public var format: String?
-
-    /// If not nil, specifies the user specified formatting closure
-    /// This is much more efficient that using `format` and is used in preference to that if both are set
-    /// For example:
-    /// logger.formatter = { (date: String, type: LoggerMessageType, file: String, line: Int, function: String, msg: String) in
-    ///     return "\(date) \(type) \(file) \(line) \(function): \(msg)"
-    /// }
-    public var formatter: (((date: String, type: LoggerMessageType, file: String, line: Int, function: String, msg: String)) -> String)?
+    /// For example: "[(%date)] [(%type)] [(%file):(%line) (%func)] (%msg)"
+    public var format: String? {
+        didSet {
+            if let format = self.format {
+                customFormatter = HeliumLogger.parseFormat(format)
+            } else {
+                customFormatter = nil
+            }
+        }
+    }
 
     /// If not nil, specifies the date time format
     public var dateFormat: String? {
@@ -96,7 +95,7 @@ public class HeliumLogger {
 
     fileprivate var dateFormatter: DateFormatter = HeliumLogger.getDateFormatter()
 
-    private static func getDateFormatter(format: String? = nil, timeZone: TimeZone? = nil) -> DateFormatter {
+    static func getDateFormatter(format: String? = nil, timeZone: TimeZone? = nil) -> DateFormatter {
         let formatter = DateFormatter()
 
         if let dateFormat = format {
@@ -110,6 +109,64 @@ public class HeliumLogger {
         }
 
         return formatter
+    }
+
+    #if os(Linux)
+    typealias RegularExpressionType = RegularExpression
+    #else
+    typealias RegularExpressionType = NSRegularExpression
+    #endif
+
+    private static var tokenRegex: RegularExpressionType? = {
+        do {
+            return try RegularExpressionType(pattern: "\\(%\\w+\\)", options: [])
+        } catch {
+            return nil
+        }
+    }()
+
+    fileprivate var customFormatter: [LogSegment]?
+
+    enum LogSegment {
+        case token(HeliumLoggerFormatValues)
+        case literal(String)
+    }
+
+    static func parseFormat(_ format: String) -> [LogSegment] {
+        var logSegments = [LogSegment]()
+
+        let nsFormat = NSString(string: format)
+        let matches = tokenRegex!.matches(in: format, options: [], range: NSMakeRange(0, nsFormat.length))
+        var loc = 0
+        for (index, match) in matches.enumerated() {
+            // possible literal segment before token match
+            if loc < match.range.location {
+                let segment = nsFormat.substring(with: NSMakeRange(loc, match.range.location - loc))
+                if !segment.isEmpty {
+                    logSegments.append(LogSegment.literal(segment))
+                }
+            }
+
+            // token regex match, may not be a valid formatValue
+            let segment = nsFormat.substring(with: NSMakeRange(match.range.location, match.range.length))
+            loc = match.range.location + match.range.length
+            if let formatValue = HeliumLoggerFormatValues(rawValue: segment) {
+                logSegments.append(LogSegment.token(formatValue))
+            } else {
+                logSegments.append(LogSegment.literal(segment))
+            }
+
+            // possible literal segment after LAST token match
+            let nextIndex = index + 1
+            if nextIndex >= matches.count {
+                let segment = nsFormat.substring(from: loc)
+                if !segment.isEmpty {
+                    logSegments.append(LogSegment.literal(segment))
+                }
+            }
+        }
+
+        return logSegments
     }
 
     /// Create a `HeliumLogger` instance
@@ -155,35 +212,40 @@ extension HeliumLogger : Logger {
         }
 
         let date = dateFormatter.string(from: Date())
-        var message: String
+        let message: String
 
-        if let formatter = self.formatter {
-            message = formatter((date: date, type: type, file: getFile(fileName), line: lineNum, function: functionName, msg: msg))
-        } else if let format = self.format {
-            message = format
-            for formatValue in HeliumLoggerFormatValues.All {
-                let stringValue = formatValue.rawValue
-                let replaceValue: String
-                switch formatValue {
-                    case .logType:
-                        replaceValue = type.description
-                    case .message:
-                        replaceValue = msg
-                    case .function:
-                        replaceValue = functionName
-                    case .line:
-                        replaceValue = "\(lineNum)"
-                    case .file:
-                        replaceValue = getFile(fileName)
+        if let formatter = customFormatter {
+            var line = ""
+            for logSegment in formatter {
+                let value: String
+
+                switch logSegment {
+                case .literal(let literal):
+                    value = literal
+                case .token(let token):
+                    switch token {
                     case .date:
-                        replaceValue = date
+                        value = date
+                    case .logType:
+                        value = type.description
+                    case .file:
+                        value = getFile(fileName)
+                    case .line:
+                        value = "\(lineNum)"
+                    case .function:
+                        value = functionName
+                    case .message:
+                        value = msg
+                    }
                 }
-                message = message.replacingOccurrences(of: stringValue, with: replaceValue)
+
+                line.append(value)
             }
+            message = line
         } else if details {
-            message = "\(date) \(type) \(getFile(fileName)) line \(lineNum) \(functionName) - \(msg)"
+            message = "[\(date)] [\(type)] [\(getFile(fileName)):\(lineNum) \(functionName)] \(msg)"
         } else {
-            message = "\(date) \(type) - \(msg)"
+            message = "[\(date)] [\(type)] \(msg)"
         }
 
         if colored {
@@ -203,7 +265,7 @@ extension HeliumLogger : Logger {
         }
     }
 
-    private func getFile(_ path: String) -> String {
+    func getFile(_ path: String) -> String {
         if self.fullFilePath {
             return path
         }
