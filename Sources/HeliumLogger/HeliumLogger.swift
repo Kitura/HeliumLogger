@@ -76,7 +76,8 @@ public class HeliumLogger {
         }
     }
 
-    /// If not nil, specifies the date time format
+    /// If not nil, specifies the format used when adding the date and the time to the
+    /// logged messages
     public var dateFormat: String? {
         didSet {
             dateFormatter = HeliumLogger.getDateFormatter(format: dateFormat, timeZone: timeZone)
@@ -121,15 +122,27 @@ public class HeliumLogger {
         do {
             return try RegularExpressionType(pattern: "\\(%\\w+\\)", options: [])
         } catch {
+            print("Error creating HeliumLogger tokenRegex: \(error)")
             return nil
         }
     }()
 
     fileprivate var customFormatter: [LogSegment]?
 
-    enum LogSegment {
+    enum LogSegment: Equatable {
         case token(HeliumLoggerFormatValues)
         case literal(String)
+
+        static func == (lhs: LogSegment, rhs: LogSegment) -> Bool {
+            switch (lhs, rhs) {
+            case (.token(let lhsToken), .token(let rhsToken)) where lhsToken == rhsToken:
+                return true
+            case (.literal(let lhsLiteral), .literal(let rhsLiteral)) where lhsLiteral == rhsLiteral:
+                return true
+            default:
+                return false
+            }
+        }
     }
 
     static func parseFormat(_ format: String) -> [LogSegment] {
@@ -137,6 +150,13 @@ public class HeliumLogger {
 
         let nsFormat = NSString(string: format)
         let matches = tokenRegex!.matches(in: format, options: [], range: NSMakeRange(0, nsFormat.length))
+
+        guard !matches.isEmpty else {
+            // entire format is a literal, probably a typo in the format
+            logSegments.append(LogSegment.literal(format))
+            return logSegments
+        }
+
         var loc = 0
         for (index, match) in matches.enumerated() {
             // possible literal segment before token match

@@ -37,6 +37,16 @@ class TestLogger : XCTestCase {
                     ("testEntry", testEntry),
                     ("testExit", testExit),
                     ("testIsLogging", testIsLogging),
+                    ("testParseFormatSingleLiteral", testParseFormatSingleLiteral),
+                    ("testParseFormatEmptyLiteral", testParseFormatEmptyLiteral),
+                    ("testParseFormatSingleToken", testParseFormatSingleToken),
+                    ("testParseFormatLiteralLooksLikeToken", testParseFormatLiteralLooksLikeToken),
+                    ("testParseFormatUnicodeLiteral", testParseFormatUnicodeLiteral),
+                    ("testParseFormatStartingWithLiteral", testParseFormatStartingWithLiteral),
+                    ("testParseFormatEndingWithLiteral", testParseFormatEndingWithLiteral),
+                    ("testParseFormatWithNoLiterals", testParseFormatWithNoLiterals),
+                    ("testParseFormatWithRepeatedTokens", testParseFormatWithRepeatedTokens),
+                    ("testGetFile", testGetFile)
         ]
     }
     
@@ -98,5 +108,112 @@ class TestLogger : XCTestCase {
         XCTAssertFalse(Log.isLogging(.warning))
         XCTAssertFalse(Log.isLogging(.entry))
     }
+
+    func testParseFormatSingleLiteral() {
+        let logSegments: [HeliumLogger.LogSegment] = [
+            .literal("literal")
+        ]
+        testParseFormat(logSegments)
+    }
+
+    func testParseFormatEmptyLiteral() {
+        let logSegments: [HeliumLogger.LogSegment] = [
+            .literal("")
+        ]
+        testParseFormat(logSegments)
+    }
+
+    func testParseFormatSingleToken() {
+        let logSegments: [HeliumLogger.LogSegment] = [
+            .token(.message)
+        ]
+        testParseFormat(logSegments)
+    }
     
+    func testParseFormatLiteralLooksLikeToken() {
+        let logSegments: [HeliumLogger.LogSegment] = [
+            .literal("(%noSoupForYou)")
+        ]
+        testParseFormat(logSegments)
+    }
+
+    func testParseFormatUnicodeLiteral() {
+        let logSegments: [HeliumLogger.LogSegment] = [
+            .literal("(%\u{1f3c8})(%\u{1f37a})"),
+            .token(.message),
+            .literal("\u{1f37a}\u{1f3c8}"),
+        ]
+        testParseFormat(logSegments)
+    }
+
+    func testParseFormatStartingWithLiteral() {
+        let logSegments: [HeliumLogger.LogSegment] = [
+            .literal("["),
+            .token(.date),
+            .literal("] "),
+            .token(.message)
+        ]
+        testParseFormat(logSegments)
+    }
+
+    func testParseFormatEndingWithLiteral() {
+        let logSegments: [HeliumLogger.LogSegment] = [
+            .token(.date),
+            .literal(" "),
+            .token(.message),
+            .literal("<EOF>")
+        ]
+        testParseFormat(logSegments)
+    }
+
+    func testParseFormatWithNoLiterals() {
+        let logSegments: [HeliumLogger.LogSegment] = [
+            .token(.date),
+            .token(.logType),
+            .token(.file),
+            .token(.line),
+            .token(.function),
+            .token(.message)
+        ]
+        testParseFormat(logSegments)
+    }
+
+    func testParseFormatWithRepeatedTokens() {
+        let logSegments: [HeliumLogger.LogSegment] = [
+            .token(.date),
+            .token(.file),
+            .token(.date),
+            .token(.file),
+            .token(.message),
+            .token(.message)
+        ]
+        testParseFormat(logSegments)
+    }
+
+    func testParseFormat(_ segments: [HeliumLogger.LogSegment]) {
+        var format = ""
+        for segment in segments {
+            switch segment {
+            case .literal(let literal):
+                format.append(literal)
+            case .token(let token):
+                format.append(token.rawValue)
+            }
+        }
+
+        let parsedSegments = HeliumLogger.parseFormat(format)
+        XCTAssertEqual(segments, parsedSegments)
+    }
+
+    func testGetFile() {
+        let filePath = #file
+        let url = URL(fileURLWithPath: filePath)
+        let logger = HeliumLogger()
+
+        logger.fullFilePath = true
+        XCTAssertEqual(filePath, logger.getFile(filePath))
+
+        logger.fullFilePath = false
+        XCTAssertEqual(url.lastPathComponent, logger.getFile(filePath))
+    }
 }
