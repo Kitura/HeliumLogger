@@ -92,7 +92,7 @@ public class HeliumLogger {
     }
 
     /// default date format - ISO 8601
-    public static let defaultDateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+    public static let defaultDateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
 
     fileprivate var dateFormatter: DateFormatter = HeliumLogger.getDateFormatter()
 
