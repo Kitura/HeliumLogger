@@ -168,7 +168,7 @@ public class HeliumLogger {
             }
 
             // token regex match, may not be a valid formatValue
-            let segment = nsFormat.substring(with: NSMakeRange(match.range.location, match.range.length))
+            let segment = nsFormat.substring(with: match.range)
             loc = match.range.location + match.range.length
             if let formatValue = HeliumLoggerFormatValues(rawValue: segment) {
                 logSegments.append(LogSegment.token(formatValue))
@@ -227,13 +227,18 @@ extension HeliumLogger : Logger {
     public func log(_ type: LoggerMessageType, msg: String,
         functionName: String, lineNum: Int, fileName: String ) {
 
-        guard type.rawValue >= self.type.rawValue else {
+        guard isLogging(type) else {
             return
         }
 
-        let date = dateFormatter.string(from: Date())
-        let message: String
+        let message = formatEntry(type: type, msg: msg, functionName: functionName, lineNum: lineNum, fileName: fileName)
+        print(message)
+    }
 
+    func formatEntry(type: LoggerMessageType, msg: String,
+                     functionName: String, lineNum: Int, fileName: String) -> String {
+
+        let message: String
         if let formatter = customFormatter {
             var line = ""
             for logSegment in formatter {
@@ -245,7 +250,7 @@ extension HeliumLogger : Logger {
                 case .token(let token):
                     switch token {
                     case .date:
-                        value = date
+                        value = formatDate()
                     case .logType:
                         value = type.description
                     case .file:
@@ -263,26 +268,30 @@ extension HeliumLogger : Logger {
             }
             message = line
         } else if details {
-            message = "[\(date)] [\(type)] [\(getFile(fileName)):\(lineNum) \(functionName)] \(msg)"
+            message = "[\(formatDate())] [\(type)] [\(getFile(fileName)):\(lineNum) \(functionName)] \(msg)"
         } else {
-            message = "[\(date)] [\(type)] \(msg)"
+            message = "[\(formatDate())] [\(type)] \(msg)"
         }
 
-        if colored {
-            let color : TerminalColor
-            switch type {
-            case .warning:
-                color = .yellow
-            case .error:
-                color = .red
-            default:
-                color = .foreground
-            }
-
-            print(color.rawValue + message + TerminalColor.foreground.rawValue)
-        } else {
-            print(message)
+        guard colored else {
+            return message
         }
+
+        let color : TerminalColor
+        switch type {
+        case .warning:
+            color = .yellow
+        case .error:
+            color = .red
+        default:
+            color = .foreground
+        }
+
+        return color.rawValue + message + TerminalColor.foreground.rawValue
+    }
+
+    func formatDate(_ date: Date = Date()) -> String {
+        return dateFormatter.string(from: date)
     }
 
     func getFile(_ path: String) -> String {
