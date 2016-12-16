@@ -19,6 +19,6 @@ import PackageDescription
 let package = Package(
     name: "HeliumLogger",
     dependencies: [
-        .Package(url: "https://github.com/IBM-Swift/LoggerAPI.git", majorVersion: 1, minor: 3),
+        .Package(url: "https://github.com/IBM-Swift/LoggerAPI.git", majorVersion: 1, minor: 4),
     ]
 )
