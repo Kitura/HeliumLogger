@@ -19,5 +19,6 @@ import XCTest
 @testable import HeliumLoggerTests
 
 XCTMain([
-            testCase(TestLogger.allTests),
+    testCase(TestLogger.allTests),
+    testCase(TestStreamLogger.allTests),
     ])
