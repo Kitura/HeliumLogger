@@ -198,7 +198,7 @@ public class HeliumLogger {
         setbuf(stdout, nil)
     }
     
-    fileprivate var type: LoggerMessageType
+    fileprivate let type: LoggerMessageType
     
     /// Create a `HeliumLogger` instance
     ///
