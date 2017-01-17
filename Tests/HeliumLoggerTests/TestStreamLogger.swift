@@ -72,8 +72,22 @@ class TestStreamLogger : XCTestCase {
             guard let messageMatch = matches.first else {
                 return LogMessage()
             }
-            let typeString = (logString as NSString).substring(with: messageMatch.rangeAt(1))
-            let messageString = (logString as NSString).substring(with: messageMatch.rangeAt(2))
+            #if os(Linux)
+                let typeStringRange = messageMatch.range(at: 1)
+                let typeString = NSString(string: logString).substring(with: typeStringRange)
+            #else
+                let typeStringRange = messageMatch.rangeAt(1)
+                let typeString = (logString as NSString).substring(with: typeStringRange)
+            #endif
+
+            #if os(Linux)
+                let messageStringRange = messageMatch.range(at: 2)
+                let messageString = NSString(string: logString).substring(with: messageStringRange)
+            #else
+                let messageStringRange = messageMatch.rangeAt(2)
+                let messageString = (logString as NSString).substring(with: messageStringRange)
+            #endif
+
             return LogMessage(typeString: typeString, messageString: messageString)
         } catch {
             XCTFail("Unable to process log string: \(logString)")
