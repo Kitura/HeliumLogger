@@ -189,9 +189,6 @@ public class HeliumLogger {
         return logSegments
     }
 
-    /// Create a `HeliumLogger` instance
-    public init() {}
-
     /// Create a `HeliumLogger` instance and set it up as the logger used by the `LoggerAPI`
     /// protocol.
     /// - Parameter type: The most detailed message type (`LoggerMessageType`) to see in the
@@ -201,13 +198,13 @@ public class HeliumLogger {
         setbuf(stdout, nil)
     }
     
-    fileprivate var type: LoggerMessageType = .verbose
+    fileprivate var type: LoggerMessageType
     
     /// Create a `HeliumLogger` instance
     ///
     /// - Parameter type: The most detailed message type (`LoggerMessageType`) to see in the
     ///                  output of the logger.
-    public init (_ type: LoggerMessageType) {
+    public init (_ type: LoggerMessageType = .verbose) {
         self.type = type
     }
 }
