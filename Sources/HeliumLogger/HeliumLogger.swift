@@ -53,7 +53,7 @@ public enum HeliumLoggerFormatValues: String {
 }
 
 /// A light weight implementation of the `LoggerAPI` protocol.
-open class HeliumLogger {
+public class HeliumLogger {
 
     /// Whether, if true, or not the logger output should be colorized.
     public var colored: Bool = false
@@ -197,9 +197,9 @@ open class HeliumLogger {
         Log.logger = HeliumLogger(type)
         setbuf(stdout, nil)
     }
-    
+
     fileprivate let type: LoggerMessageType
-    
+
     /// Create a `HeliumLogger` instance
     ///
     /// - Parameter type: The most detailed message type (`LoggerMessageType`) to see in the
@@ -208,7 +208,7 @@ open class HeliumLogger {
         self.type = type
     }
 
-    open func doPrint(_ message: String) {
+    func doPrint(_ message: String) {
         print(message)
     }
 }
