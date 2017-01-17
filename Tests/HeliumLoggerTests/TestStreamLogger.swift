@@ -27,7 +27,7 @@ import LoggerAPI
 #endif
 
 class TestStreamLogger : XCTestCase {
-    
+
     static var allTests : [(String, (TestStreamLogger) -> () throws -> Void)] {
         return [
                     ("testInfo", testInfo),
@@ -39,7 +39,7 @@ class TestStreamLogger : XCTestCase {
                     ("testIsLogging", testIsLogging)
         ]
     }
-    
+
     class MockTextOutputStream: TextOutputStream {
         var stream: String = ""
         func write(_ string: String) {
@@ -65,7 +65,7 @@ class TestStreamLogger : XCTestCase {
 
     private func getLogMessage(_ logString: String) -> LogMessage {
         do {
-            let regularExpression = try RegularExpressionType(pattern: "\\[.*\\]\\s\\[(.*)\\]\\s\\[.*\\]\\s(.*)")
+            let regularExpression = try RegularExpressionType(pattern: "\\[.*\\]\\s\\[(.*)\\]\\s\\[.*\\]\\s(.*)", options: [])
             let matches = regularExpression.matches(in: logString, options: [],
                 range: NSRange(location:0, length: logString.characters.count))
 
@@ -102,35 +102,35 @@ class TestStreamLogger : XCTestCase {
             Log.info(logMessage)
         }
     }
-    
+
     func testWarning() {
         let logMessage = "This is a warning"
         testLog(message: logMessage, type: "WARNING") {
             Log.warning(logMessage)
         }
     }
-    
+
     func testError() {
         let logMessage = "This is an error"
         testLog(message: logMessage, type: "ERROR") {
             Log.error(logMessage)
         }
     }
-    
+
     func testEntry() {
         let logMessage = "This is an entry"
         testLog(message: logMessage, type: "ENTRY", logLevel: .entry) {
             Log.entry(logMessage)
         }
     }
-    
+
     func testExit() {
         let logMessage = "This is an exit"
         testLog(message: logMessage, type: "EXIT", logLevel: .exit) {
             Log.exit(logMessage)
         }
     }
-    
+
     func testLevel() {
         let logMessage = "Log Message"
 
