@@ -180,12 +180,12 @@ class TestStreamLogger : XCTestCase {
         XCTAssertFalse(Log.isLogging(.debug))
         XCTAssertFalse(Log.isLogging(.entry))
 
-        HeliumLogger.use(.entry)
+        HeliumStreamLogger.use(.entry, outputStream: MockTextOutputStream())
         XCTAssertTrue(Log.isLogging(.error))
         XCTAssertTrue(Log.isLogging(.verbose))
         XCTAssertTrue(Log.isLogging(.entry))
 
-        HeliumLogger.use(.error)
+        HeliumStreamLogger.use(.error, outputStream: MockTextOutputStream())
         XCTAssertTrue(Log.isLogging(.error))
         XCTAssertFalse(Log.isLogging(.warning))
         XCTAssertFalse(Log.isLogging(.entry))
