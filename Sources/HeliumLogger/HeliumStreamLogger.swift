@@ -32,6 +32,11 @@ public class HeliumStreamLogger<OutputStream: TextOutputStream> : HeliumLogger {
         Log.logger = HeliumStreamLogger(type, outputStream: outputStream)
     }
 
+    /// Prevent accidentally invoking use() function of the superclass.
+    /// Prints an error message, no logging is enabled.
+    ///
+    /// - Parameter type: The most detailed message type (`LoggerMessageType`) to see in the
+    ///                  output of the logger.
     override public class func use(_ type: LoggerMessageType = .verbose) {
         print("Unable to instiate HeliumStreamLogger. " +
               "Use HeliumStreamLogger.use(:LoggerMessageType:OutputStream) function.")
