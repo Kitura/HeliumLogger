@@ -32,6 +32,11 @@ public class HeliumStreamLogger<OutputStream: TextOutputStream> : HeliumLogger {
         Log.logger = HeliumStreamLogger(type, outputStream: outputStream)
     }
 
+    override public class func use(_ type: LoggerMessageType = .verbose) {
+        print("Unable to instiate HeliumStreamLogger. " +
+              "Use HeliumStreamLogger.use(:LoggerMessageType:OutputStream) function.")
+    }
+
     /// Create a `HeliumStreamLogger` instance
     ///
     /// - Parameter type: The most detailed message type (`LoggerMessageType`) to see in the

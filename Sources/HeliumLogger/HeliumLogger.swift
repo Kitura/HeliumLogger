@@ -193,7 +193,7 @@ public class HeliumLogger {
     /// protocol.
     /// - Parameter type: The most detailed message type (`LoggerMessageType`) to see in the
     ///                  output of the logger. Defaults to `verbose`.
-    public static func use(_ type: LoggerMessageType = .verbose) {
+    public class func use(_ type: LoggerMessageType = .verbose) {
         Log.logger = HeliumLogger(type)
         setbuf(stdout, nil)
     }
