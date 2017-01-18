@@ -36,7 +36,8 @@ class TestStreamLogger : XCTestCase {
                     ("testLevel", testLevel),
                     ("testEntry", testEntry),
                     ("testExit", testExit),
-                    ("testIsLogging", testIsLogging)
+                    ("testIsLogging", testIsLogging),
+                    ("testUse", testUse)
         ]
     }
 
@@ -189,5 +190,24 @@ class TestStreamLogger : XCTestCase {
         XCTAssertTrue(Log.isLogging(.error))
         XCTAssertFalse(Log.isLogging(.warning))
         XCTAssertFalse(Log.isLogging(.entry))
+    }
+
+    func verifyNoLoggingEnabled() {
+        XCTAssertFalse(Log.isLogging(.verbose))
+        XCTAssertFalse(Log.isLogging(.error))
+        XCTAssertFalse(Log.isLogging(.warning))
+        XCTAssertFalse(Log.isLogging(.debug))
+        XCTAssertFalse(Log.isLogging(.entry))
+        XCTAssertFalse(Log.isLogging(.exit))
+    }
+
+    func testUse() {
+        Log.logger = nil
+
+        verifyNoLoggingEnabled()
+
+        HeliumStreamLogger<MockTextOutputStream>.use(.entry)
+
+        verifyNoLoggingEnabled()
     }
 }
