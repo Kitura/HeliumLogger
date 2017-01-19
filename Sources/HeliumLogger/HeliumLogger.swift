@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2015, 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -189,26 +189,27 @@ public class HeliumLogger {
         return logSegments
     }
 
-    /// Create a `HeliumLogger` instance
-    public init() {}
-
     /// Create a `HeliumLogger` instance and set it up as the logger used by the `LoggerAPI`
     /// protocol.
     /// - Parameter type: The most detailed message type (`LoggerMessageType`) to see in the
     ///                  output of the logger. Defaults to `verbose`.
-    public static func use(_ type: LoggerMessageType = .verbose) {
+    public class func use(_ type: LoggerMessageType = .verbose) {
         Log.logger = HeliumLogger(type)
         setbuf(stdout, nil)
     }
-    
-    fileprivate var type: LoggerMessageType = .verbose
-    
+
+    fileprivate let type: LoggerMessageType
+
     /// Create a `HeliumLogger` instance
     ///
     /// - Parameter type: The most detailed message type (`LoggerMessageType`) to see in the
     ///                  output of the logger.
-    public init (_ type: LoggerMessageType) {
+    public init (_ type: LoggerMessageType = .verbose) {
         self.type = type
+    }
+
+    func doPrint(_ message: String) {
+        print(message)
     }
 }
 
@@ -232,7 +233,7 @@ extension HeliumLogger : Logger {
         }
 
         let message = formatEntry(type: type, msg: msg, functionName: functionName, lineNum: lineNum, fileName: fileName)
-        print(message)
+        doPrint(message)
     }
 
     func formatEntry(type: LoggerMessageType, msg: String,

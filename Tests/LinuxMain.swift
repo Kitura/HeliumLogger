@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2016, 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,5 +19,6 @@ import XCTest
 @testable import HeliumLoggerTests
 
 XCTMain([
-            testCase(TestLogger.allTests),
+    testCase(TestLogger.allTests),
+    testCase(TestStreamLogger.allTests),
     ])
