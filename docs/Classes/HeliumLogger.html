@@ -47,6 +47,9 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/HeliumLogger.html">HeliumLogger</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/HeliumStreamLogger.html">HeliumStreamLogger</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -139,6 +142,33 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:vC12HeliumLogger12HeliumLogger12fullFilePathSb"></a>
+                    <a name="//apple_ref/swift/Property/fullFilePath" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC12HeliumLogger12HeliumLogger12fullFilePathSb">fullFilePath</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>If true, use the full file path, not just the filename.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">fullFilePath</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:vC12HeliumLogger12HeliumLogger6formatGSqSS_"></a>
                     <a name="//apple_ref/swift/Property/format" class="dashAnchor"></a>
                     <a class="token" href="#/s:vC12HeliumLogger12HeliumLogger6formatGSqSS_">format</a>
@@ -149,7 +179,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>If not nil, specifies the user specified logging format.</p>
+                        <p>If not nil, specifies the user specified logging format.
+For example: <q>[(%date)] [(%type)] [(%file):(%line) (%func)] (%msg)</q></p>
 
                       </div>
                       <div class="declaration">
@@ -194,9 +225,9 @@ logged messages</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC12HeliumLogger12HeliumLoggercFT_S0_"></a>
-                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC12HeliumLogger12HeliumLoggercFT_S0_">init()</a>
+                    <a name="/s:vC12HeliumLogger12HeliumLogger8timeZoneGSqV10Foundation8TimeZone_"></a>
+                    <a name="//apple_ref/swift/Property/timeZone" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC12HeliumLogger12HeliumLogger8timeZoneGSqV10Foundation8TimeZone_">timeZone</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -204,14 +235,41 @@ logged messages</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Create a <code>HeliumLogger</code> instance</p>
+                        <p>If not nil, specifies the timezone used in the date time format</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">()</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">timeZone</span><span class="p">:</span> <span class="kt">TimeZone</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZvC12HeliumLogger12HeliumLogger17defaultDateFormatSS"></a>
+                    <a name="//apple_ref/swift/Variable/defaultDateFormat" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZvC12HeliumLogger12HeliumLogger17defaultDateFormatSS">defaultDateFormat</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>default date format - ISO 8601</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">defaultDateFormat</span> <span class="o">=</span> <span class="s">"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"</span></code></pre>
 
                         </div>
                       </div>
@@ -241,7 +299,7 @@ protocol.
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">use</span><span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">LoggerMessageType</span> <span class="o">=</span> <span class="o">.</span><span class="n">verbose</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">use</span><span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">LoggerMessageType</span> <span class="o">=</span> <span class="o">.</span><span class="n">verbose</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -295,7 +353,7 @@ protocol.
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span> <span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">LoggerMessageType</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span> <span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">LoggerMessageType</span> <span class="o">=</span> <span class="o">.</span><span class="n">verbose</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -508,7 +566,7 @@ will be outputed in the log (i.e. will not be filtered out).</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2016-09-22)</p>
+      <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2017-01-26)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

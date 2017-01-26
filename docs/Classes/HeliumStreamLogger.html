@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>HeliumStreamLogger Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Class/HeliumStreamLogger" class="dashAnchor"></a>
+
+    <a title="HeliumStreamLogger Class Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          HeliumLogger Docs
+        </a>
+         (100% documented)
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/IBM-Swift/HeliumLogger/">
+            <img class="header-icon" src="../img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">HeliumLogger Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      HeliumStreamLogger Class Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/HeliumLogger.html">HeliumLogger</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/HeliumStreamLogger.html">HeliumStreamLogger</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/HeliumLoggerFormatValues.html">HeliumLoggerFormatValues</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/TerminalColor.html">TerminalColor</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            <h1>HeliumStreamLogger</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">HeliumStreamLogger</span><span class="o">&lt;</span><span class="kt">OutputStream</span><span class="p">:</span> <span class="kt">TextOutputStream</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Classes/HeliumLogger.html">HeliumLogger</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>HeliumLogger, that prints to a TextOutputStream</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFC12HeliumLogger18HeliumStreamLogger3useFTO9LoggerAPI17LoggerMessageType12outputStreamx_T_"></a>
+                    <a name="//apple_ref/swift/Method/use(_:outputStream:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFC12HeliumLogger18HeliumStreamLogger3useFTO9LoggerAPI17LoggerMessageType12outputStreamx_T_">use(_:outputStream:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a <code>HeliumStreamLogger</code> instance and set it up as the logger used by the <code>LoggerAPI</code>
+protocol.
+- Parameter type: The most detailed message type (<code>LoggerMessageType</code>) to see in the
+                 output of the logger. Defaults to <code>verbose</code>.
+- Parameter outputStream: stream to output the log to</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">use</span><span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">LoggerMessageType</span> <span class="o">=</span> <span class="o">.</span><span class="n">verbose</span><span class="p">,</span> <span class="nv">outputStream</span><span class="p">:</span> <span class="kt">OutputStream</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The most detailed message type (<code>LoggerMessageType</code>) to see in the output of the logger. Defaults to <code>verbose</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>outputStream</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>stream to output the log to</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFC12HeliumLogger18HeliumStreamLogger3useFO9LoggerAPI17LoggerMessageTypeT_"></a>
+                    <a name="//apple_ref/swift/Method/use(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFC12HeliumLogger18HeliumStreamLogger3useFO9LoggerAPI17LoggerMessageTypeT_">use(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Prevent accidentally invoking use() function of the superclass.
+Prints an error message, no logging is enabled.</p>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter type: The most detailed message type (<code>LoggerMessageType</code>) to see in the
+             output of the logger.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">override</span> <span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">use</span><span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">LoggerMessageType</span> <span class="o">=</span> <span class="o">.</span><span class="n">verbose</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The most detailed message type (<code>LoggerMessageType</code>) to see in the output of the logger.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC12HeliumLogger18HeliumStreamLoggercFTO9LoggerAPI17LoggerMessageType12outputStreamx_GS0_x_"></a>
+                    <a name="//apple_ref/swift/Method/init(_:outputStream:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC12HeliumLogger18HeliumStreamLoggercFTO9LoggerAPI17LoggerMessageType12outputStreamx_GS0_x_">init(_:outputStream:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a <code>HeliumStreamLogger</code> instance</p>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter type: The most detailed message type (<code>LoggerMessageType</code>) to see in the
+             output of the logger.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span> <span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">LoggerMessageType</span> <span class="o">=</span> <span class="o">.</span><span class="n">verbose</span><span class="p">,</span> <span class="nv">outputStream</span><span class="p">:</span> <span class="kt">OutputStream</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The most detailed message type (<code>LoggerMessageType</code>) to see in the output of the logger.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2017-01-26)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>
