@@ -12,14 +12,14 @@ Provides a lightweight Swift Logging framework.
 
 ## Usage:
 
-1. Import `HeliumLogger` and `LoggerAPI`:
+1. **Import `HeliumLogger` and `LoggerAPI`:**
 
   ```swift
   import HeliumLogger
   import LoggerAPI
   ```
 
-2. Initialize an instance of `HeliumLogger`. Set it as the logger used by `LoggerAPI`.
+2. **Initialize an instance of `HeliumLogger`. Set it as the logger used by `LoggerAPI`.**
   ```swift
   let logger = HeliumLogger()
   Log.logger = logger
@@ -30,7 +30,7 @@ Provides a lightweight Swift Logging framework.
   HeliumLogger.use()
   ```
 
-3. You can specify the level of output on initialization. You will see output of that level, and all levels below that. The order goes:
+3. **You can specify the level of output on initialization. You will see output of that level, and all levels below that. The order goes:**
 
   1. entry (entering a function)
   2. exit (exiting a function)
@@ -47,12 +47,19 @@ Provides a lightweight Swift Logging framework.
   ```
   Will show messages of `verbose`, `info`, `warning`, and `error` type.
 
+  While,
   ```swift
   HeliumLogger.use(.warning)
   ```
-  Will only show messages of `warning` and `error` type.
+  will only show messages of `warning` and `error` type.
 
-4. Logging messages:
+4. **Adjust logging levels at runtime:**
+  
+  Calling `HeliumLogger.use(LoggerMessageType)` will overwrite your current HeliumLogger instance. This allows you to, for example, if in a route you detect an error with your application, dynamically increase the log level.
+  
+  Any customization you did to your previous HeliumLogger instance will be overwritten (see list item 6).
+
+5. **Logging messages:**
   ```swift
   Log.verbose("This is a verbose log message.")
 
@@ -65,7 +72,7 @@ Provides a lightweight Swift Logging framework.
   Log.debug("This is a debug message.")
   ```
 
-5. Further customization:
+6. **Further customization:**
   ```swift
   /// Whether, if true, or not the logger output should be colorized.
   public var colored: Bool = false
