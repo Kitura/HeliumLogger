@@ -55,9 +55,9 @@ Provides a lightweight Swift Logging framework.
 
 4. **Adjust logging levels at runtime:**
   
-  Calling `HeliumLogger.use(LoggerMessageType)` will overwrite your current HeliumLogger instance. This allows you to, for example, if in a route you detect an error with your application, dynamically increase the log level.
+  Calling `HeliumLogger.use(LoggerMessageType)` will set the LoggerAPI to use this new HeliumLogger instance. This allows you to, for example, if in a route you detect an error with your application, dynamically increase the log level.
   
-  Any customization you did to your previous HeliumLogger instance will be overwritten (see list item 6).
+  This new instance will not have any customization you did to other instances. (see list item 6).
 
 5. **Logging messages:**
   ```swift
