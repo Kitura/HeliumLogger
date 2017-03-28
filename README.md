@@ -32,13 +32,13 @@ Provides a lightweight Swift Logging framework.
 
 3. **You can specify the level of output on initialization. You will see output of that level, and all levels below that. The order goes:**
 
-  1. entry (entering a function)
-  2. exit (exiting a function)
-  3. debug
-  4. verbose (default)
-  5. info
-  6. warning
-  7. error
+   1. entry (entering a function)
+   2. exit (exiting a function)
+   3. debug
+   4. verbose (default)
+   5. info
+   6. warning
+   7. error
 
   So for example,
   ```swift
