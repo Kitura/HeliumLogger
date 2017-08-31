@@ -112,19 +112,13 @@ public class HeliumLogger {
         return formatter
     }
 
-    #if os(Linux)
-        #if swift(>=3.1)
-            typealias RegularExpressionType = NSRegularExpression
-        #else
-            typealias RegularExpressionType = RegularExpression
-        #endif
-    #else
-    typealias RegularExpressionType = NSRegularExpression
+    #if os(Linux) && !swift(>=3.1)
+    typealias NSRegularExpression = RegularExpression
     #endif
 
-    private static var tokenRegex: RegularExpressionType? = {
+    private static var tokenRegex: NSRegularExpression? = {
         do {
-            return try RegularExpressionType(pattern: "\\(%\\w+\\)", options: [])
+            return try NSRegularExpression(pattern: "\\(%\\w+\\)", options: [])
         } catch {
             print("Error creating HeliumLogger tokenRegex: \(error)")
             return nil
@@ -230,7 +224,7 @@ extension HeliumLogger : Logger {
     /// - Parameter fileName: The file of the source code of the function invoking the
     ///                      logger API.
     public func log(_ type: LoggerMessageType, msg: String,
-        functionName: String, lineNum: Int, fileName: String ) {
+                    functionName: String, lineNum: Int, fileName: String ) {
 
         guard isLogging(type) else {
             return
@@ -306,7 +300,12 @@ extension HeliumLogger : Logger {
         guard let range = path.range(of: "/", options: .backwards) else {
             return path
         }
-        return path.substring(from: range.upperBound)
+
+        #if swift(>=3.2)
+            return String(path[range.upperBound...])
+        #else
+            return path.substring(from: range.upperBound)
+        #endif
     }
 
     /// A function that will indicate if a message with a specified type (`LoggerMessageType`)
