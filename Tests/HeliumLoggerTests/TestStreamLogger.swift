@@ -30,14 +30,14 @@ class TestStreamLogger : XCTestCase {
 
     static var allTests : [(String, (TestStreamLogger) -> () throws -> Void)] {
         return [
-                    ("testInfo", testInfo),
-                    ("testWarning", testWarning),
-                    ("testError", testError),
-                    ("testLevel", testLevel),
-                    ("testEntry", testEntry),
-                    ("testExit", testExit),
-                    ("testIsLogging", testIsLogging),
-                    ("testUse", testUse)
+            ("testInfo", testInfo),
+            ("testWarning", testWarning),
+            ("testError", testError),
+            ("testLevel", testLevel),
+            ("testEntry", testEntry),
+            ("testExit", testExit),
+            ("testIsLogging", testIsLogging),
+            ("testUse", testUse)
         ]
     }
 
@@ -48,14 +48,8 @@ class TestStreamLogger : XCTestCase {
         }
     }
 
-    #if os(Linux)
-        #if swift(>=3.1)
-            typealias RegularExpressionType = NSRegularExpression
-        #else
-            typealias RegularExpressionType = RegularExpression
-        #endif
-    #else
-    typealias RegularExpressionType = NSRegularExpression
+    #if os(Linux) && !swift(>=3.1)
+    typealias NSRegularExpression = RegularExpression
     #endif
 
     struct LogMessage {
@@ -70,9 +64,9 @@ class TestStreamLogger : XCTestCase {
 
     private func getLogMessage(_ logString: String) -> LogMessage {
         do {
-            let regularExpression = try RegularExpressionType(pattern: "\\[.*\\]\\s\\[(.*)\\]\\s\\[.*\\]\\s(.*)", options: [])
+            let regularExpression = try NSRegularExpression(pattern: "\\[.*\\]\\s\\[(.*)\\]\\s\\[.*\\]\\s(.*)", options: [])
             let matches = regularExpression.matches(in: logString, options: [],
-                range: NSRange(location:0, length: logString.characters.count))
+                                                    range: NSRange(location:0, length: logString.characters.count))
 
             guard let messageMatch = matches.first else {
                 return LogMessage()
@@ -81,7 +75,11 @@ class TestStreamLogger : XCTestCase {
                 let typeStringRange = messageMatch.range(at: 1)
                 let typeString = NSString(string: logString).substring(with: typeStringRange)
             #else
-                let typeStringRange = messageMatch.rangeAt(1)
+                #if swift(>=3.2)
+                    let typeStringRange = messageMatch.range(at: 1)
+                #else
+                    let typeStringRange = messageMatch.rangeAt(1)
+                #endif
                 let typeString = (logString as NSString).substring(with: typeStringRange)
             #endif
 
@@ -89,7 +87,11 @@ class TestStreamLogger : XCTestCase {
                 let messageStringRange = messageMatch.range(at: 2)
                 let messageString = NSString(string: logString).substring(with: messageStringRange)
             #else
-                let messageStringRange = messageMatch.rangeAt(2)
+                #if swift(>=3.2)
+                    let messageStringRange = messageMatch.range(at: 2)
+                #else
+                    let messageStringRange = messageMatch.rangeAt(2)
+                #endif
                 let messageString = (logString as NSString).substring(with: messageStringRange)
             #endif
 
