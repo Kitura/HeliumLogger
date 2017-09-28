@@ -1,1 +1,0 @@
-{"object": {"dependencies": [{"basedOn": null, "name": "LoggerAPI", "repositoryURL": "https://github.com/IBM-Swift/LoggerAPI.git", "state": {"checkoutState": {"branch": null, "revision": "cdaff0ffffe3fd211f1392641a07815ebb7d9634", "version": "2.0.0"}, "name": "checkout"}, "subpath": "LoggerAPI.git--6718475482736433789"}]}, "version": 1}
