@@ -1,0 +1,5 @@
+app:
+  image: ibmcom/swift-ubuntu:4.0
+  volumes:
+    - .:/HeliumLogger
+  command: bash -c "cd /HeliumLogger && swift package --build-path .build-linux clean && swift build --build-path .build-linux && swift test --build-path .build-linux && swift package --build-path .build-linux clean"

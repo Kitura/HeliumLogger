@@ -112,10 +112,6 @@ public class HeliumLogger {
         return formatter
     }
 
-    #if os(Linux) && !swift(>=3.1)
-    typealias NSRegularExpression = RegularExpression
-    #endif
-
     private static var tokenRegex: NSRegularExpression? = {
         do {
             return try NSRegularExpression(pattern: "\\(%\\w+\\)", options: [])
@@ -301,11 +297,7 @@ extension HeliumLogger : Logger {
             return path
         }
 
-        #if swift(>=3.2)
-            return String(path[range.upperBound...])
-        #else
-            return path.substring(from: range.upperBound)
-        #endif
+        return String(path[range.upperBound...])
     }
 
     /// A function that will indicate if a message with a specified type (`LoggerMessageType`)

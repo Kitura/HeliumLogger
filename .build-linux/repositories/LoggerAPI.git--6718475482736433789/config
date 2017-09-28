@@ -1,0 +1,9 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = true
+	ignorecase = true
+[remote "origin"]
+	url = https://github.com/IBM-Swift/LoggerAPI.git
+	fetch = +refs/*:refs/*
+	mirror = true
