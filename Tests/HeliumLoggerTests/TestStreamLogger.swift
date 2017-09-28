@@ -48,10 +48,6 @@ class TestStreamLogger : XCTestCase {
         }
     }
 
-    #if os(Linux) && !swift(>=3.1)
-    typealias NSRegularExpression = RegularExpression
-    #endif
-
     struct LogMessage {
         let typeString: String
         let messageString: String
@@ -71,27 +67,17 @@ class TestStreamLogger : XCTestCase {
             guard let messageMatch = matches.first else {
                 return LogMessage()
             }
+            let typeStringRange = messageMatch.range(at: 1)
             #if os(Linux)
-                let typeStringRange = messageMatch.range(at: 1)
                 let typeString = NSString(string: logString).substring(with: typeStringRange)
             #else
-                #if swift(>=3.2)
-                    let typeStringRange = messageMatch.range(at: 1)
-                #else
-                    let typeStringRange = messageMatch.rangeAt(1)
-                #endif
                 let typeString = (logString as NSString).substring(with: typeStringRange)
             #endif
 
+            let messageStringRange = messageMatch.range(at: 2)
             #if os(Linux)
-                let messageStringRange = messageMatch.range(at: 2)
                 let messageString = NSString(string: logString).substring(with: messageStringRange)
             #else
-                #if swift(>=3.2)
-                    let messageStringRange = messageMatch.range(at: 2)
-                #else
-                    let messageStringRange = messageMatch.rangeAt(2)
-                #endif
                 let messageString = (logString as NSString).substring(with: messageStringRange)
             #endif
 

@@ -4,3 +4,4 @@ build
 HeliumLogger.xcodeproj
 *.DS_Store
 Package.resolved
+.build-linux/
