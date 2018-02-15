@@ -7,8 +7,9 @@ Provides a lightweight Swift Logging framework.
 
 ## Features:
 
+- Output logs to the stdout stream by default, or choose another output stream by extending the standard library
 - Different logging levels such as Warning, Verbose, and Error
-- Color output to terminal 
+- Enable/Disable color output to terminal 
 
 ## Usage:
 
