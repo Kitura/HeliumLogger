@@ -1,7 +1,30 @@
-# HeliumLogger
 
-[![Build Status](https://travis-ci.org/IBM-Swift/HeliumLogger.svg?branch=master)](https://travis-ci.org/IBM-Swift/HeliumLogger)
-[![codecov](https://codecov.io/gh/IBM-Swift/HeliumLogger/branch/master/graph/badge.svg)](https://codecov.io/gh/IBM-Swift/HeliumLogger)
+
+<p align="center">
+    <a href="http://kitura.io/">
+        <img src="https://raw.githubusercontent.com/IBM-Swift/Kitura/master/Sources/Kitura/resources/kitura-bird.svg?sanitize=true" height="100" alt="Kitura">
+    </a>
+</p>
+
+
+<p align="center">
+    <a href="http://www.kitura.io/">
+    <img src="https://img.shields.io/badge/docs-kitura.io-1FBCE4.svg" alt="Docs">
+    </a>
+    <a href="https://travis-ci.org/IBM-Swift/HeliumLogger">
+    <img src="https://travis-ci.org/IBM-Swift/HeliumLogger.svg?branch=master" alt="Build Status - Master">
+    </a>
+    <img src="https://img.shields.io/badge/os-macOS-green.svg?style=flat" alt="macOS">
+    <img src="https://img.shields.io/badge/os-linux-green.svg?style=flat" alt="Linux">
+    <img src="https://img.shields.io/badge/license-Apache2-blue.svg?style=flat" alt="Apache 2">
+    <img src="https://codecov.io/gh/IBM-Swift/HeliumLogger/branch/master/graph/badge.svg" alt="codecov">
+    <a href="http://swift-at-ibm-slack.mybluemix.net/">
+    <img src="http://swift-at-ibm-slack.mybluemix.net/badge.svg" alt="Slack Status">
+    </a>
+</p>
+
+
+# HeliumLogger
 
 Provides a lightweight Swift Logging framework.
 
