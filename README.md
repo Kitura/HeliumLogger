@@ -6,7 +6,7 @@
 
 
 <p align="center">
-    <a href="https://www.kitura.io/en/api/">
+    <a href="https://www.kitura.io/">
     <img src="https://img.shields.io/badge/docs-kitura.io-1FBCE4.svg" alt="Docs">
     </a>
     <a href="https://travis-ci.org/IBM-Swift/HeliumLogger">
@@ -25,113 +25,117 @@
 
 Provides a lightweight Swift logging framework which supports logging to standard output.
 
-## Features:
+## Features
 
 - Different logging levels such as Warning, Verbose, and Error
 - Color output to terminal
 
-## Usage:
+## Usage
 
-1. **Add the HeliumLogger package to the dependencies within your application’s `Package.swift` file.**
+1. **Add dependencies**
+
+Add the `HeliumLogger` package to the dependencies within your application’s `Package.swift` file. Substitute `"x.x.x"` with the latest `HeliumLogger` [release](https://github.com/IBM-Swift/HeliumLogger/releases).
 
 ```swift
-// swift-tools-version:4.0
-import PackageDescription
-
-let package = Package(
-    name: "example",
-    dependencies: [
-      .package(url: "https://github.com/IBM-Swift/HeliumLogger.git", .upToNextMinor(from: "x.x.x")
-      ],
-    targets: [
-      .target(name: "example", dependencies: [ "HeliumLogger"])
-    ]
-)
+.package(url: "https://github.com/IBM-Swift/HeliumLogger.git", from: "x.x.x")
 ```
-Substitute `"x.x.x"` with the latest `HeliumLogger` [release](https://github.com/IBM-Swift/HeliumLogger/releases).
+Add `HeliumLogger` to your target's dependencies:
+```swift
+.target(name: "example", dependencies: ["HeliumLogger"]),
+```
 
-2. **Import `HeliumLogger` and `LoggerAPI`.**
+2. **Import packages**
 
-  ```swift
-  import HeliumLogger
-  import LoggerAPI
-  ```
+```swift
+import HeliumLogger
+import LoggerAPI
+```
 
-3. **Initialize an instance of `HeliumLogger`. Set it as the logger used by `LoggerAPI`.**
-  ```swift
-  let logger = HeliumLogger()
-  Log.logger = logger
-  ```
+3. **Initialize `HeliumLogger`**
 
-  or, if you don't need to customize `HeliumLogger`:
-  ```swift
-  HeliumLogger.use()
-  ```
+Initialize an instance of `HeliumLogger`. Set it as the logger used by `LoggerAPI`.
 
-4. **You can specify the level of output on initialization. You will see output of that level, and all levels below that.**
+```swift
+let logger = HeliumLogger()
+Log.logger = logger
+```
+
+or, if you don't need to customize `HeliumLogger`:
+```swift
+HeliumLogger.use()
+```
+
+4. **Logging levels**
+
+You can specify the level of output on initialization. You will see output of that level, and all levels below that.
 
 The order is:
-   1. entry (entering a function)
-   2. exit (exiting a function)
-   3. debug
-   4. verbose (default)
-   5. info
-   6. warning
-   7. error
+ 1. entry (entering a function)
+ 2. exit (exiting a function)
+ 3. debug
+ 4. verbose (default)
+ 5. info
+ 6. warning
+ 7. error
 
 For example, this logger will show messages of type `verbose`, `info`, `warning`, and `error`:
 ```swift
-  let logger = HeliumLogger(.verbose)
-  Log.logger = logger
+let logger = HeliumLogger(.verbose)
+Log.logger = logger
 ```
 
 In this example, the logger will only show messages of type `warning` and `error`:
 ```swift
-  HeliumLogger.use(.warning)
+HeliumLogger.use(.warning)
 ```
 
 5. **Adjust logging levels at runtime**
 
-  Calling `HeliumLogger.use(LoggerMessageType)` will set the `LoggerAPI` to use this new HeliumLogger instance. If in a route you detect an error with your application, you could use this to dynamically increase the log level.
+Calling `HeliumLogger.use(LoggerMessageType)` will set the `LoggerAPI` to use this new HeliumLogger instance. If in a route you detect an error with your application, you could use this to dynamically increase the log level.
 
-  This new instance will not have any customization which you applied to other instances (see list item 7).
+This new instance will not have any customization which you applied to other instances (see list item 7).
 
 6. **Logging messages**
 
 How to use HeliumLogger to log messages in your application:
-  ```swift
-  Log.verbose("This is a verbose log message.")
+```swift
+Log.verbose("This is a verbose log message.")
 
-  Log.info("This is an informational log message.")
+Log.info("This is an informational log message.")
 
-  Log.warning("This is a warning.")
+Log.warning("This is a warning.")
 
-  Log.error("This is an error.")
+Log.error("This is an error.")
 
-  Log.debug("This is a debug message.")
-  ```
+Log.debug("This is a debug message.")
+```
 
 7. **Further customization**
-  ```swift
-  /// Whether, if true, or not the logger output should be colorized.
-  public var colored: Bool = false
 
-  /// If true, use the detailed format when a user logging format wasn't specified.
-  public var details: Bool = true
+```swift
+/// Whether, if true, or not the logger output should be colorized.
+public var colored: Bool = false
 
-  /// If true, use the full file path, not just the filename.
-  public var fullFilePath: Bool = false
+/// If true, use the detailed format when a user logging format wasn't specified.
+public var details: Bool = true
 
-  /// If not nil, specifies the user specified logging format.
-  /// For example: "[(%date)] [(%type)] [(%file):(%line) (%func)] (%msg)"
-  public var format: String?
+/// If true, use the full file path, not just the filename.
+public var fullFilePath: Bool = false
 
-  /// If not nil, specifies the format used when adding the date and the time to the logged messages.
-  public var dateFormat: String?
+/// If not nil, specifies the user specified logging format.
+/// For example: "[(%date)] [(%type)] [(%file):(%line) (%func)] (%msg)"
+public var format: String?
 
-  /// If not nil, specifies the timezone used in the date time format.
-  public var timeZone: TimeZone?
-  ```
+/// If not nil, specifies the format used when adding the date and the time to the logged messages.
+public var dateFormat: String?
+
+/// If not nil, specifies the timezone used in the date time format.
+public var timeZone: TimeZone?
+```
+
+## API documentation
+
+For more information visit our [API reference](http://ibm-swift.github.io/HeliumLogger/).
 
 ## Community
 
