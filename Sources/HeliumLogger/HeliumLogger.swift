@@ -17,7 +17,7 @@
 import LoggerAPI
 import Foundation
 
-/// The set of colors used when logging with colorized lines
+/// The set of colors used when logging with colorized lines.
 public enum TerminalColor: String {
     /// Log text in white.
     case white = "\u{001B}[0;37m" // white
@@ -31,8 +31,8 @@ public enum TerminalColor: String {
     case background = "\u{001B}[0;49m" // default background color
 }
 
-/// The set of substitution "variables" that can be used when formatting one's
-/// logged messages.
+/// The set of substitution "variables" that can be used when formatting the
+/// messages to be logged.
 public enum HeliumLoggerFormatValues: String {
     /// The message being logged.
     case message = "(%msg)"
@@ -40,7 +40,7 @@ public enum HeliumLoggerFormatValues: String {
     case function = "(%func)"
     /// The line in the source code of the function invoking the logger API.
     case line = "(%line)"
-    /// The file of the source code of the function invoking the logger API.
+    /// The file containing the source code of the function invoking the logger API.
     case file = "(%file)"
     /// The type of the logged message (i.e. error, warning, etc.).
     case logType = "(%type)"
@@ -52,20 +52,32 @@ public enum HeliumLoggerFormatValues: String {
     ]
 }
 
-/// A light weight implementation of the `LoggerAPI` protocol.
+/// A lightweight implementation of the `LoggerAPI` protocol.
 public class HeliumLogger {
 
-    /// Whether, if true, or not the logger output should be colorized.
+    /// A Boolean value that indicates whether the logger output should be colorized.
+    ///
+    ///### Usage Example: ###
+    /// The logger is set up to log `verbose` level messages (this is the default) and all levels below,
+    /// that is, it will show messages of type `verbose`, `info`, `warning` and `error`.
+    ///```swift
+    ///let logger = HeliumLogger()
+    ///logger.colored = true
+    ///Log.logger = logger
+    ///Log.error("This message will be red when your application is run in the terminal.")
+    ///```
     public var colored: Bool = false
 
-    /// If true, use the detailed format when a user logging format wasn't specified.
+    /// A Boolean value indicating whether to use the detailed logging format when a user logging format is not
+    /// specified.
     public var details: Bool = true
 
-    /// If true, use the full file path, not just the filename.
+    /// A Boolean value indicating whether to use the full file path, or just the filename.
     public var fullFilePath: Bool = false
 
-    /// If not nil, specifies the user specified logging format.
-    /// For example: "[(%date)] [(%type)] [(%file):(%line) (%func)] (%msg)"
+    /// The user specified logging format, if `format` is not `nil`.
+    ///
+    /// For example: "[(%date)] [(%type)] [(%file):(%line) (%func)] (%msg)".
     public var format: String? {
         didSet {
             if let format = self.format {
@@ -76,22 +88,21 @@ public class HeliumLogger {
         }
     }
 
-    /// If not nil, specifies the format used when adding the date and the time to the
-    /// logged messages
+    /// The format used when adding the date and time to logged messages, if `dateFormat` is not `nil`.
     public var dateFormat: String? {
         didSet {
             dateFormatter = HeliumLogger.getDateFormatter(format: dateFormat, timeZone: timeZone)
         }
     }
 
-    /// If not nil, specifies the timezone used in the date time format
+    /// The timezone used in the date time format, if `timeZone` is not `nil`.
     public var timeZone: TimeZone? {
         didSet {
             dateFormatter = HeliumLogger.getDateFormatter(format: dateFormat, timeZone: timeZone)
         }
     }
 
-    /// default date format - ISO 8601
+    /// Default date format - ISO 8601.
     public static let defaultDateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
 
     fileprivate var dateFormatter: DateFormatter = HeliumLogger.getDateFormatter()
@@ -189,6 +200,18 @@ public class HeliumLogger {
 
     /// Create a `HeliumLogger` instance and set it up as the logger used by the `LoggerAPI`
     /// protocol.
+    ///
+    ///### Usage Example: ###
+    /// In the default case, the logger is set up to log `verbose` level messages and all levels below,
+    /// that is, it will show messages of type `verbose`, `info`, `warning` and `error`.
+    ///```swift
+    ///HeliumLogger.use()
+    ///```
+    /// In the following example, the logger is set up to log `warning` level messages and all levels below, i.e.
+    /// it will show messages of type `warning` and `error`.
+    ///```swift
+    ///HeliumLogger.use(.warning)
+    ///```
     /// - Parameter type: The most detailed message type (`LoggerMessageType`) to see in the
     ///                  output of the logger. Defaults to `verbose`.
     public class func use(_ type: LoggerMessageType = .verbose) {
@@ -198,10 +221,10 @@ public class HeliumLogger {
 
     fileprivate let type: LoggerMessageType
 
-    /// Create a `HeliumLogger` instance
+    /// Create a `HeliumLogger` instance.
     ///
     /// - Parameter type: The most detailed message type (`LoggerMessageType`) to see in the
-    ///                  output of the logger.
+    ///                  output of the logger. Defaults to `verbose`.
     public init (_ type: LoggerMessageType = .verbose) {
         self.type = type
     }
@@ -213,15 +236,15 @@ public class HeliumLogger {
 
 /// Implement the `LoggerAPI` protocol in the `HeliumLogger` class.
 extension HeliumLogger : Logger {
-
+    
     /// Output a logged message.
     ///
     /// - Parameter type: The type of the message (`LoggerMessageType`) being logged.
-    /// - Parameter msg: The mesage to be logged
+    /// - Parameter msg: The message to be logged.
     /// - Parameter functionName: The name of the function invoking the logger API.
     /// - Parameter lineNum: The line in the source code of the function invoking the
     ///                     logger API.
-    /// - Parameter fileName: The file of the source code of the function invoking the
+    /// - Parameter fileName: The file containing the source code of the function invoking the
     ///                      logger API.
     public func log(_ type: LoggerMessageType, msg: String,
                     functionName: String, lineNum: Int, fileName: String ) {
@@ -308,13 +331,22 @@ extension HeliumLogger : Logger {
         #endif
     }
 
-    /// A function that will indicate if a message with a specified type (`LoggerMessageType`)
-    /// will be outputed in the log (i.e. will not be filtered out).
+    /// Indicates if a message with a specified type (`LoggerMessageType`) will be in the logger
+    /// output (i.e. will not be filtered out).
     ///
-    /// -Parameter type: The type of message that one wants to know if it will be output in the log.
+    ///### Usage Example: ###
+    /// The logger is set up to log `warning` level messages and all levels below, that is, it will
+    /// show messages of type `warning` and `error`. This means a `verbose` level message will not be displayed.
+    ///```swift
+    ///let logger = HeliumLogger(.warning)
+    ///Log.logger = logger
+    ///logger.isLogging(.warning) // Returns true
+    ///logger.isLogging(.verbose) // Returns false
+    ///```
+    /// - Parameter type: The type of message (`LoggerMessageType`).
     ///
-    /// - Returns: A Bool indicating whether, if true, or not a message of the specified type
-    ///           (`LoggerMessageType`) would be output.
+    /// - Returns: A Boolean indicating whether a message of the specified type
+    ///           (`LoggerMessageType`) will be in the logger output.
     public func isLogging(_ type: LoggerMessageType) -> Bool {
         return type.rawValue >= self.type.rawValue
     }
