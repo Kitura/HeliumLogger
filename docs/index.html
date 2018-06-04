@@ -8,6 +8,9 @@
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
 
@@ -20,6 +23,12 @@
           HeliumLogger Docs
         </a>
          (100% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
       </p>
     
         <p class="header-col header-col--secondary">
@@ -52,7 +61,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Enums.html">Enums</a>
+            <a class="nav-group-name-link" href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/HeliumLoggerFormatValues.html">HeliumLoggerFormatValues</a>
@@ -69,27 +78,153 @@
         <section class="section">
           <div class="section-content">
             
-            <a href='#heliumlogger' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='heliumlogger'>HeliumLogger</h1>
+            <p align="center">
+    <a href="http://kitura.io/">
+        <img src="https://raw.githubusercontent.com/IBM-Swift/Kitura/master/Sources/Kitura/resources/kitura-bird.svg?sanitize=true" height="100" alt="Kitura">
+    </a>
+</p>
 
-<p><a href="https://travis-ci.org/IBM-Swift/HeliumLogger"><img src="https://travis-ci.org/IBM-Swift/HeliumLogger.svg?branch=master" alt="Build Status"></a>
-<a href="https://codecov.io/gh/IBM-Swift/HeliumLogger"><img src="https://codecov.io/gh/IBM-Swift/HeliumLogger/branch/master/graph/badge.svg" alt="codecov"></a></p>
+<p align="center">
+    <a href="https://www.kitura.io/">
+    <img src="https://img.shields.io/badge/docs-kitura.io-1FBCE4.svg" alt="Docs">
+    </a>
+    <a href="https://travis-ci.org/IBM-Swift/HeliumLogger">
+    <img src="https://travis-ci.org/IBM-Swift/HeliumLogger.svg?branch=master" alt="Build Status - Master">
+    </a>
+    <img src="https://codecov.io/gh/IBM-Swift/HeliumLogger/branch/master/graph/badge.svg" alt="codecov">
+    <img src="https://img.shields.io/badge/os-macOS-green.svg?style=flat" alt="macOS">
+    <img src="https://img.shields.io/badge/os-linux-green.svg?style=flat" alt="Linux">
+    <img src="https://img.shields.io/badge/license-Apache2-blue.svg?style=flat" alt="Apache 2">
+    <a href="http://swift-at-ibm-slack.mybluemix.net/">
+    <img src="http://swift-at-ibm-slack.mybluemix.net/badge.svg" alt="Slack Status">
+    </a>
+</p>
+<h1 id='heliumlogger' class='heading'>HeliumLogger</h1>
 
-<p>Provides a lightweight Swift Logging framework.</p>
-<a href='#features' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='features'>Features:</h2>
+<p>Provides a lightweight Swift logging framework which supports logging to standard output.</p>
+<h2 id='features' class='heading'>Features</h2>
 
 <ul>
 <li>Different logging levels such as Warning, Verbose, and Error</li>
 <li>Color output to terminal</li>
 </ul>
-<a href='#usage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='usage'>Usage:</h2>
+<h2 id='usage' class='heading'>Usage</h2>
+
+<ol>
+<li><strong>Add dependencies</strong></li>
+</ol>
+
+<p>Add the <code><a href="Classes/HeliumLogger.html">HeliumLogger</a></code> package to the dependencies within your application’s <code>Package.swift</code> file. Substitute <code>&quot;x.x.x&quot;</code> with the latest <code><a href="Classes/HeliumLogger.html">HeliumLogger</a></code> <a href="https://github.com/IBM-Swift/HeliumLogger/releases">release</a>.</p>
+<pre class="highlight swift"><code><span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/IBM-Swift/HeliumLogger.git"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"x.x.x"</span><span class="p">)</span>
+</code></pre>
+
+<p>Add <code><a href="Classes/HeliumLogger.html">HeliumLogger</a></code> to your target&rsquo;s dependencies:</p>
+<pre class="highlight swift"><code><span class="o">.</span><span class="nf">target</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"example"</span><span class="p">,</span> <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span><span class="s">"HeliumLogger"</span><span class="p">]),</span>
+</code></pre>
+
+<ol>
+<li><strong>Import packages</strong></li>
+</ol>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">HeliumLogger</span>
 <span class="kd">import</span> <span class="kt">LoggerAPI</span>
-
-<span class="kt">Log</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="kt">HeliumLogger</span><span class="p">()</span>
-
-<span class="kt">Log</span><span class="o">.</span><span class="nf">verbose</span><span class="p">(</span><span class="s">"This is a log message."</span><span class="p">)</span>
-
 </code></pre>
+
+<ol>
+<li><strong>Initialize <code><a href="Classes/HeliumLogger.html">HeliumLogger</a></code></strong></li>
+</ol>
+
+<p>Initialize an instance of <code><a href="Classes/HeliumLogger.html">HeliumLogger</a></code>. Set it as the logger used by <code>LoggerAPI</code>.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">logger</span> <span class="o">=</span> <span class="kt">HeliumLogger</span><span class="p">()</span>
+<span class="kt">Log</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logger</span>
+</code></pre>
+
+<p>or, if you don&rsquo;t need to customize <code><a href="Classes/HeliumLogger.html">HeliumLogger</a></code>:</p>
+<pre class="highlight swift"><code><span class="kt">HeliumLogger</span><span class="o">.</span><span class="nf">use</span><span class="p">()</span>
+</code></pre>
+
+<ol>
+<li><strong>Logging levels</strong></li>
+</ol>
+
+<p>You can specify the level of output on initialization. You will see output of that level, and all levels below that.</p>
+
+<p>The order is:</p>
+<li>entry (entering a function)</li>
+<li>exit (exiting a function)</li>
+<li>debug</li>
+<li>verbose (default)</li>
+<li>info</li>
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    warning
+
+</div>
+<li>error</li>
+
+<p>For example, this logger will show messages of type <code>verbose</code>, <code>info</code>, <code>warning</code>, and <code>error</code>:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">logger</span> <span class="o">=</span> <span class="kt">HeliumLogger</span><span class="p">(</span><span class="o">.</span><span class="n">verbose</span><span class="p">)</span>
+<span class="kt">Log</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logger</span>
+</code></pre>
+
+<p>In this example, the logger will only show messages of type <code>warning</code> and <code>error</code>:</p>
+<pre class="highlight swift"><code><span class="kt">HeliumLogger</span><span class="o">.</span><span class="nf">use</span><span class="p">(</span><span class="o">.</span><span class="n">warning</span><span class="p">)</span>
+</code></pre>
+
+<ol>
+<li><strong>Adjust logging levels at runtime</strong></li>
+</ol>
+
+<p>Calling <code>HeliumLogger.use(LoggerMessageType)</code> will set the <code>LoggerAPI</code> to use this new HeliumLogger instance. If in a route you detect an error with your application, you could use this to dynamically increase the log level.</p>
+
+<p>This new instance will not have any customization which you applied to other instances (see list item 7).</p>
+
+<ol>
+<li><strong>Logging messages</strong></li>
+</ol>
+
+<p>How to use HeliumLogger to log messages in your application:</p>
+<pre class="highlight swift"><code><span class="kt">Log</span><span class="o">.</span><span class="nf">verbose</span><span class="p">(</span><span class="s">"This is a verbose log message."</span><span class="p">)</span>
+
+<span class="kt">Log</span><span class="o">.</span><span class="nf">info</span><span class="p">(</span><span class="s">"This is an informational log message."</span><span class="p">)</span>
+
+<span class="kt">Log</span><span class="o">.</span><span class="nf">warning</span><span class="p">(</span><span class="s">"This is a warning."</span><span class="p">)</span>
+
+<span class="kt">Log</span><span class="o">.</span><span class="nf">error</span><span class="p">(</span><span class="s">"This is an error."</span><span class="p">)</span>
+
+<span class="kt">Log</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"This is a debug message."</span><span class="p">)</span>
+</code></pre>
+
+<ol>
+<li><strong>Further customization</strong></li>
+</ol>
+<pre class="highlight swift"><code><span class="c1">/// Whether, if true, or not the logger output should be colorized.</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">colored</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span>
+
+<span class="c1">/// If true, use the detailed format when a user logging format wasn't specified.</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">details</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span>
+
+<span class="c1">/// If true, use the full file path, not just the filename.</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">fullFilePath</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span>
+
+<span class="c1">/// If not nil, specifies the user specified logging format.</span>
+<span class="c1">/// For example: "[(%date)] [(%type)] [(%file):(%line) (%func)] (%msg)"</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">format</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span>
+
+<span class="c1">/// If not nil, specifies the format used when adding the date and the time to the logged messages.</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">dateFormat</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span>
+
+<span class="c1">/// If not nil, specifies the timezone used in the date time format.</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">timeZone</span><span class="p">:</span> <span class="kt">TimeZone</span><span class="p">?</span>
+</code></pre>
+<h2 id='api-documentation' class='heading'>API documentation</h2>
+
+<p>For more information visit our <a href="http://ibm-swift.github.io/HeliumLogger/">API reference</a>.</p>
+<h2 id='community' class='heading'>Community</h2>
+
+<p>We love to talk server-side Swift, and Kitura. Join our <a href="http://swift-at-ibm-slack.mybluemix.net/">Slack</a> to meet the team!</p>
+<h2 id='license' class='heading'>License</h2>
+
+<p>This library is licensed under Apache 2.0. Full license text is available in <a href="https://github.com/IBM-Swift/HeliumLogger/blob/master/LICENSE.txt">LICENSE</a>.</p>
 
           </div>
         </section>
@@ -98,8 +233,8 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2017-01-26)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2018-06-04)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

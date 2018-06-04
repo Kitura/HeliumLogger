@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Enums  Reference</title>
+    <title>Enumerations  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
     <meta charset="utf-8">
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
 
 
-    <a title="Enums  Reference"></a>
+    <a title="Enumerations  Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -20,6 +23,12 @@
           HeliumLogger Docs
         </a>
          (100% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
       </p>
     
         <p class="header-col header-col--secondary">
@@ -34,7 +43,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="index.html">HeliumLogger Reference</a>
       <img class="carat" src="img/carat.png" />
-      Enums  Reference
+      Enumerations  Reference
     </p>
 
     <div class="content-wrapper">
@@ -52,7 +61,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Enums.html">Enums</a>
+            <a class="nav-group-name-link" href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/HeliumLoggerFormatValues.html">HeliumLoggerFormatValues</a>
@@ -68,8 +77,8 @@
 
         <section class="section">
           <div class="section-content">
-            <h1>Enums</h1>
-            <p>The following enums are available globally.</p>
+            <h1>Enumerations</h1>
+            <p>The following enumerations are available globally.</p>
 
           </div>
         </section>
@@ -81,9 +90,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:O12HeliumLogger13TerminalColor"></a>
+                    <a name="/s:12HeliumLogger13TerminalColorO"></a>
                     <a name="//apple_ref/swift/Enum/TerminalColor" class="dashAnchor"></a>
-                    <a class="token" href="#/s:O12HeliumLogger13TerminalColor">TerminalColor</a>
+                    <a class="token" href="#/s:12HeliumLogger13TerminalColorO">TerminalColor</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -91,7 +100,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The set of colors used when logging with colorized lines</p>
+                        <p>The set of colors used when logging with colorized lines.</p>
 
                         <a href="Enums/TerminalColor.html" class="slightly-smaller">See more</a>
                       </div>
@@ -99,7 +108,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">TerminalColor</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">TerminalColor</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -109,9 +118,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:O12HeliumLogger24HeliumLoggerFormatValues"></a>
+                    <a name="/s:12HeliumLogger0aB12FormatValuesO"></a>
                     <a name="//apple_ref/swift/Enum/HeliumLoggerFormatValues" class="dashAnchor"></a>
-                    <a class="token" href="#/s:O12HeliumLogger24HeliumLoggerFormatValues">HeliumLoggerFormatValues</a>
+                    <a class="token" href="#/s:12HeliumLogger0aB12FormatValuesO">HeliumLoggerFormatValues</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -119,8 +128,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The set of substitution <q>variables</q> that can be used when formatting one&rsquo;s
-logged messages.</p>
+                        <p>The set of substitution <q>variables</q> that can be used when formatting the
+messages to be logged.</p>
 
                         <a href="Enums/HeliumLoggerFormatValues.html" class="slightly-smaller">See more</a>
                       </div>
@@ -128,7 +137,7 @@ logged messages.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">HeliumLoggerFormatValues</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">HeliumLoggerFormatValues</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -143,8 +152,8 @@ logged messages.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2017-01-26)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2018-06-04)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>
