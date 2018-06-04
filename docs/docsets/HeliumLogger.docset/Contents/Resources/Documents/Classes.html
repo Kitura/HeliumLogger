@@ -8,6 +8,9 @@
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
 
@@ -20,6 +23,12 @@
           HeliumLogger Docs
         </a>
          (100% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
       </p>
     
         <p class="header-col header-col--secondary">
@@ -52,7 +61,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Enums.html">Enums</a>
+            <a class="nav-group-name-link" href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/HeliumLoggerFormatValues.html">HeliumLoggerFormatValues</a>
@@ -81,9 +90,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:C12HeliumLogger12HeliumLogger"></a>
+                    <a name="/s:12HeliumLoggerAAC"></a>
                     <a name="//apple_ref/swift/Class/HeliumLogger" class="dashAnchor"></a>
-                    <a class="token" href="#/s:C12HeliumLogger12HeliumLogger">HeliumLogger</a>
+                    <a class="token" href="#/s:12HeliumLoggerAAC">HeliumLogger</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -91,7 +100,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A light weight implementation of the <code>LoggerAPI</code> protocol.</p>
+                        <p>A lightweight implementation of the <code>LoggerAPI</code> protocol.</p>
 
                         <a href="Classes/HeliumLogger.html" class="slightly-smaller">See more</a>
                       </div>
@@ -99,7 +108,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">HeliumLogger</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">HeliumLogger</span></code></pre>
 
                         </div>
                       </div>
@@ -113,9 +122,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:C12HeliumLogger18HeliumStreamLogger"></a>
+                    <a name="/s:12HeliumLogger0a6StreamB0C"></a>
                     <a name="//apple_ref/swift/Class/HeliumStreamLogger" class="dashAnchor"></a>
-                    <a class="token" href="#/s:C12HeliumLogger18HeliumStreamLogger">HeliumStreamLogger</a>
+                    <a class="token" href="#/s:12HeliumLogger0a6StreamB0C">HeliumStreamLogger</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -123,7 +132,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>HeliumLogger, that prints to a TextOutputStream</p>
+                        <p>A <code><a href="Classes/HeliumLogger.html">HeliumLogger</a></code>, that prints to a TextOutputStream.</p>
 
                         <a href="Classes/HeliumStreamLogger.html" class="slightly-smaller">See more</a>
                       </div>
@@ -131,7 +140,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">HeliumStreamLogger</span><span class="o">&lt;</span><span class="kt">OutputStream</span><span class="p">:</span> <span class="kt">TextOutputStream</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="Classes/HeliumLogger.html">HeliumLogger</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">HeliumStreamLogger</span><span class="o">&lt;</span><span class="kt">OutputStream</span><span class="p">:</span> <span class="kt">TextOutputStream</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="Classes/HeliumLogger.html">HeliumLogger</a></span></code></pre>
 
                         </div>
                       </div>
@@ -146,8 +155,8 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2017-01-26)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2018-06-04)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>
