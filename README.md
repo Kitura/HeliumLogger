@@ -32,26 +32,27 @@ Provides a lightweight Swift logging framework which supports logging to standar
 
 ## Usage
 
-1. **Add dependencies**
+#### Add dependencies
 
 Add the `HeliumLogger` package to the dependencies within your application’s `Package.swift` file. Substitute `"x.x.x"` with the latest `HeliumLogger` [release](https://github.com/IBM-Swift/HeliumLogger/releases).
 
 ```swift
 .package(url: "https://github.com/IBM-Swift/HeliumLogger.git", from: "x.x.x")
 ```
+
 Add `HeliumLogger` to your target's dependencies:
+
 ```swift
 .target(name: "example", dependencies: ["HeliumLogger"]),
 ```
-
-2. **Import packages**
+#### Import packages
 
 ```swift
 import HeliumLogger
 import LoggerAPI
 ```
 
-3. **Initialize `HeliumLogger`**
+#### Initialize HeliumLogger
 
 Initialize an instance of `HeliumLogger`. Set it as the logger used by `LoggerAPI`.
 
@@ -65,7 +66,7 @@ or, if you don't need to customize `HeliumLogger`:
 HeliumLogger.use()
 ```
 
-4. **Logging levels**
+#### Logging levels
 
 You can specify the level of output on initialization. You will see output of that level, and all levels below that.
 
@@ -75,7 +76,7 @@ The order is:
  3. debug
  4. verbose (default)
  5. info
- 6. warning
+ 6. &#32;warning
  7. error
 
 For example, this logger will show messages of type `verbose`, `info`, `warning`, and `error`:
@@ -89,13 +90,13 @@ In this example, the logger will only show messages of type `warning` and `error
 HeliumLogger.use(.warning)
 ```
 
-5. **Adjust logging levels at runtime**
+#### Adjust logging levels at runtime
 
 Calling `HeliumLogger.use(LoggerMessageType)` will set the `LoggerAPI` to use this new HeliumLogger instance. If in a route you detect an error with your application, you could use this to dynamically increase the log level.
 
 This new instance will not have any customization which you applied to other instances (see list item 7).
 
-6. **Logging messages**
+#### Logging messages
 
 How to use HeliumLogger to log messages in your application:
 ```swift
@@ -110,7 +111,7 @@ Log.error("This is an error.")
 Log.debug("This is a debug message.")
 ```
 
-7. **Further customization**
+#### Further customization
 
 ```swift
 /// Whether, if true, or not the logger output should be colorized.
