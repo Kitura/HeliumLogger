@@ -109,10 +109,7 @@
 <li>Color output to terminal</li>
 </ul>
 <h2 id='usage' class='heading'>Usage</h2>
-
-<ol>
-<li><strong>Add dependencies</strong></li>
-</ol>
+<h4 id='add-dependencies' class='heading'>Add dependencies</h4>
 
 <p>Add the <code><a href="Classes/HeliumLogger.html">HeliumLogger</a></code> package to the dependencies within your application’s <code>Package.swift</code> file. Substitute <code>&quot;x.x.x&quot;</code> with the latest <code><a href="Classes/HeliumLogger.html">HeliumLogger</a></code> <a href="https://github.com/IBM-Swift/HeliumLogger/releases">release</a>.</p>
 <pre class="highlight swift"><code><span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/IBM-Swift/HeliumLogger.git"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"x.x.x"</span><span class="p">)</span>
@@ -121,17 +118,11 @@
 <p>Add <code><a href="Classes/HeliumLogger.html">HeliumLogger</a></code> to your target&rsquo;s dependencies:</p>
 <pre class="highlight swift"><code><span class="o">.</span><span class="nf">target</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"example"</span><span class="p">,</span> <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span><span class="s">"HeliumLogger"</span><span class="p">]),</span>
 </code></pre>
-
-<ol>
-<li><strong>Import packages</strong></li>
-</ol>
+<h4 id='import-packages' class='heading'>Import packages</h4>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">HeliumLogger</span>
 <span class="kd">import</span> <span class="kt">LoggerAPI</span>
 </code></pre>
-
-<ol>
-<li><strong>Initialize <code><a href="Classes/HeliumLogger.html">HeliumLogger</a></code></strong></li>
-</ol>
+<h4 id='initialize-heliumlogger' class='heading'>Initialize HeliumLogger</h4>
 
 <p>Initialize an instance of <code><a href="Classes/HeliumLogger.html">HeliumLogger</a></code>. Set it as the logger used by <code>LoggerAPI</code>.</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">logger</span> <span class="o">=</span> <span class="kt">HeliumLogger</span><span class="p">()</span>
@@ -141,25 +132,21 @@
 <p>or, if you don&rsquo;t need to customize <code><a href="Classes/HeliumLogger.html">HeliumLogger</a></code>:</p>
 <pre class="highlight swift"><code><span class="kt">HeliumLogger</span><span class="o">.</span><span class="nf">use</span><span class="p">()</span>
 </code></pre>
-
-<ol>
-<li><strong>Logging levels</strong></li>
-</ol>
+<h4 id='logging-levels' class='heading'>Logging levels</h4>
 
 <p>You can specify the level of output on initialization. You will see output of that level, and all levels below that.</p>
 
 <p>The order is:</p>
+
+<ol>
 <li>entry (entering a function)</li>
 <li>exit (exiting a function)</li>
 <li>debug</li>
 <li>verbose (default)</li>
 <li>info</li>
-<div class="aside aside-warning">
-    <p class="aside-title">Warning</p>
-    warning
-
-</div>
+<li>&#32;warning</li>
 <li>error</li>
+</ol>
 
 <p>For example, this logger will show messages of type <code>verbose</code>, <code>info</code>, <code>warning</code>, and <code>error</code>:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">logger</span> <span class="o">=</span> <span class="kt">HeliumLogger</span><span class="p">(</span><span class="o">.</span><span class="n">verbose</span><span class="p">)</span>
@@ -169,18 +156,12 @@
 <p>In this example, the logger will only show messages of type <code>warning</code> and <code>error</code>:</p>
 <pre class="highlight swift"><code><span class="kt">HeliumLogger</span><span class="o">.</span><span class="nf">use</span><span class="p">(</span><span class="o">.</span><span class="n">warning</span><span class="p">)</span>
 </code></pre>
-
-<ol>
-<li><strong>Adjust logging levels at runtime</strong></li>
-</ol>
+<h4 id='adjust-logging-levels-at-runtime' class='heading'>Adjust logging levels at runtime</h4>
 
 <p>Calling <code>HeliumLogger.use(LoggerMessageType)</code> will set the <code>LoggerAPI</code> to use this new HeliumLogger instance. If in a route you detect an error with your application, you could use this to dynamically increase the log level.</p>
 
 <p>This new instance will not have any customization which you applied to other instances (see list item 7).</p>
-
-<ol>
-<li><strong>Logging messages</strong></li>
-</ol>
+<h4 id='logging-messages' class='heading'>Logging messages</h4>
 
 <p>How to use HeliumLogger to log messages in your application:</p>
 <pre class="highlight swift"><code><span class="kt">Log</span><span class="o">.</span><span class="nf">verbose</span><span class="p">(</span><span class="s">"This is a verbose log message."</span><span class="p">)</span>
@@ -193,10 +174,7 @@
 
 <span class="kt">Log</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"This is a debug message."</span><span class="p">)</span>
 </code></pre>
-
-<ol>
-<li><strong>Further customization</strong></li>
-</ol>
+<h4 id='further-customization' class='heading'>Further customization</h4>
 <pre class="highlight swift"><code><span class="c1">/// Whether, if true, or not the logger output should be colorized.</span>
 <span class="kd">public</span> <span class="k">var</span> <span class="nv">colored</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span>
 
@@ -233,7 +211,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2018-06-04)</p>
+      <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2018-06-08)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
