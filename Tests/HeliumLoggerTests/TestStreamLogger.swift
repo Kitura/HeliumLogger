@@ -75,11 +75,7 @@ class TestStreamLogger : XCTestCase {
                 let typeStringRange = messageMatch.range(at: 1)
                 let typeString = NSString(string: logString).substring(with: typeStringRange)
             #else
-                #if swift(>=3.2)
-                    let typeStringRange = messageMatch.rangeAt(1)
-                #else
-                    let typeStringRange = messageMatch.range(at: 1)
-                #endif
+                let typeStringRange = messageMatch.rangeAt(1)
                 let typeString = (logString as NSString).substring(with: typeStringRange)
             #endif
 
@@ -87,11 +83,7 @@ class TestStreamLogger : XCTestCase {
                 let messageStringRange = messageMatch.range(at: 2)
                 let messageString = NSString(string: logString).substring(with: messageStringRange)
             #else
-                #if swift(>=3.2)
-                    let messageStringRange = messageMatch.rangeAt(2)
-                #else
-                    let messageStringRange = messageMatch.range(at: 2)
-                #endif
+                let messageStringRange = messageMatch.rangeAt(2)
                 let messageString = (logString as NSString).substring(with: messageStringRange)
             #endif
 
