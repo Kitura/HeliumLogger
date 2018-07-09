@@ -65,13 +65,18 @@ class TestStreamLogger : XCTestCase {
     private func getLogMessage(_ logString: String) -> LogMessage {
         do {
             let regularExpression = try NSRegularExpression(pattern: "\\[.*\\]\\s\\[(.*)\\]\\s\\[.*\\]\\s(.*)", options: [])
+            #if swift(>=3.2)
+            let matches = regularExpression.matches(in: logString, options: [],
+                                                    range: NSRange(location:0, length: logString.count))
+            #else
             let matches = regularExpression.matches(in: logString, options: [],
                                                     range: NSRange(location:0, length: logString.characters.count))
+            #endif
 
             guard let messageMatch = matches.first else {
                 return LogMessage()
             }
-            #if os(Linux)
+            #if os(Linux) || swift(>=4.0)
                 let typeStringRange = messageMatch.range(at: 1)
                 let typeString = NSString(string: logString).substring(with: typeStringRange)
             #else
@@ -79,7 +84,7 @@ class TestStreamLogger : XCTestCase {
                 let typeString = (logString as NSString).substring(with: typeStringRange)
             #endif
 
-            #if os(Linux)
+            #if os(Linux) || swift(>=4.0)
                 let messageStringRange = messageMatch.range(at: 2)
                 let messageString = NSString(string: logString).substring(with: messageStringRange)
             #else
