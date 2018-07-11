@@ -6,8 +6,8 @@
 
 
 <p align="center">
-    <a href="https://www.kitura.io/">
-    <img src="https://img.shields.io/badge/docs-kitura.io-1FBCE4.svg" alt="Docs">
+    <a href="https://ibm-swift.github.io/HeliumLogger/index.html">
+    <img src="https://img.shields.io/badge/apidoc-HeliumLogger-1FBCE4.svg?style=flat" alt="APIDoc">
     </a>
     <a href="https://travis-ci.org/IBM-Swift/HeliumLogger">
     <img src="https://travis-ci.org/IBM-Swift/HeliumLogger.svg?branch=master" alt="Build Status - Master">
