@@ -7,9 +7,9 @@ Provides a lightweight Swift Logging framework.
 
 ## Features:
 
-- Output logs to the stdout stream by default, or choose another output stream by extending the standard library
+- Logs output to stdout by default. You can change the output stream, see example usage for [`HeliumStreamLogger.use(_:outputStream:)`](http://ibm-swift.github.io/HeliumLogger/Classes/HeliumStreamLogger.html#use).
 - Different logging levels such as Warning, Verbose, and Error
-- Enable/Disable color output to terminal 
+- Enable/disable color output to terminal 
 
 ## Usage:
 
