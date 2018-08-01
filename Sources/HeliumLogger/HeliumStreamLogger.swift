@@ -17,7 +17,7 @@
 import LoggerAPI
 import Foundation
 
-/// HeliumLogger, that prints to a TextOutputStream
+/// A `HeliumLogger`, that prints to a TextOutputStream.
 public class HeliumStreamLogger<OutputStream: TextOutputStream> : HeliumLogger {
 
     // stream to output the log to
@@ -25,27 +25,44 @@ public class HeliumStreamLogger<OutputStream: TextOutputStream> : HeliumLogger {
 
     /// Create a `HeliumStreamLogger` instance and set it up as the logger used by the `LoggerAPI`
     /// protocol.
+    /// ### Usage Example: ###
+    /// This example shows logging to stderr.
+    /// ```swift
+    /// struct StandardError: TextOutputStream {
+    ///     func write(_ text: String) {
+    ///         guard let data = text.data(using: String.Encoding.utf8) else {
+    ///           return
+    ///         }
+    ///         FileHandle.standardError.write(data)
+    ///     }
+    /// }
+    ///
+    /// let se = StandardError()
+    /// HeliumStreamLogger.use(outputStream: se)
+    /// ```
     /// - Parameter type: The most detailed message type (`LoggerMessageType`) to see in the
     ///                  output of the logger. Defaults to `verbose`.
-    /// - Parameter outputStream: stream to output the log to
+    /// - Parameter outputStream: The stream to send the output of the logger to.
     public static func use(_ type: LoggerMessageType = .verbose, outputStream: OutputStream) {
         Log.logger = HeliumStreamLogger(type, outputStream: outputStream)
     }
 
-    /// Prevent accidentally invoking use() function of the superclass.
-    /// Prints an error message, no logging is enabled.
+    /// Prevent the user accidentally invoking the use() function of the superclass.
+    /// Prints an error message, stating that you should call `use(_:outputStream:)`,
+    /// no logging is enabled.
     ///
     /// - Parameter type: The most detailed message type (`LoggerMessageType`) to see in the
-    ///                  output of the logger.
+    ///                  output of the logger. Default to `verbose`.
     override public class func use(_ type: LoggerMessageType = .verbose) {
-        print("Unable to instiate HeliumStreamLogger. " +
+        print("Unable to instantiate HeliumStreamLogger. " +
               "Use HeliumStreamLogger.use(:LoggerMessageType:OutputStream) function.")
     }
 
-    /// Create a `HeliumStreamLogger` instance
+    /// Create a `HeliumStreamLogger` instance.
     ///
     /// - Parameter type: The most detailed message type (`LoggerMessageType`) to see in the
-    ///                  output of the logger.
+    ///                  output of the logger. Defaults to `verbose`.
+    /// - Parameter outputStream: The stream to send the output of the logger to.
     public init (_ type: LoggerMessageType = .verbose, outputStream: OutputStream) {
         self.outputStream = outputStream
         super.init(type)

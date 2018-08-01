@@ -8,6 +8,9 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
 
@@ -21,6 +24,12 @@
           HeliumLogger Docs
         </a>
          (100% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
       </p>
     
         <p class="header-col header-col--secondary">
@@ -53,7 +62,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Enums.html">Enums</a>
+            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/HeliumLoggerFormatValues.html">HeliumLoggerFormatValues</a>
@@ -72,11 +81,11 @@
             <h1>HeliumLogger</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">HeliumLogger</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">HeliumLogger</span></code></pre>
 
                 </div>
               </div>
-            <p>A light weight implementation of the <code>LoggerAPI</code> protocol.</p>
+            <p>A lightweight implementation of the <code>LoggerAPI</code> protocol.</p>
 
           </div>
         </section>
@@ -88,9 +97,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC12HeliumLogger12HeliumLogger7coloredSb"></a>
+                    <a name="/s:12HeliumLoggerAAC7coloredSbv"></a>
                     <a name="//apple_ref/swift/Property/colored" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC12HeliumLogger12HeliumLogger7coloredSb">colored</a>
+                    <a class="token" href="#/s:12HeliumLoggerAAC7coloredSbv">colored</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -98,14 +107,23 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Whether, if true, or not the logger output should be colorized.</p>
+                        <p>A Boolean value that indicates whether the logger output should be colorized.</p>
+<h3 id='usage-example' class='heading'>Usage Example:</h3>
+
+<p>The logger is set up to log <code>verbose</code> level messages (this is the default) and all levels below,
+ that is, it will show messages of type <code>verbose</code>, <code>info</code>, <code>warning</code> and <code>error</code>.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">logger</span> <span class="o">=</span> <span class="kt">HeliumLogger</span><span class="p">()</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">colored</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="kt">Log</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logger</span>
+<span class="kt">Log</span><span class="o">.</span><span class="nf">error</span><span class="p">(</span><span class="s">"This message will be red when your application is run in the terminal."</span><span class="p">)</span>
+</code></pre>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">colored</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">colored</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span></code></pre>
 
                         </div>
                       </div>
@@ -115,9 +133,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC12HeliumLogger12HeliumLogger7detailsSb"></a>
+                    <a name="/s:12HeliumLoggerAAC7detailsSbv"></a>
                     <a name="//apple_ref/swift/Property/details" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC12HeliumLogger12HeliumLogger7detailsSb">details</a>
+                    <a class="token" href="#/s:12HeliumLoggerAAC7detailsSbv">details</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -125,14 +143,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>If true, use the detailed format when a user logging format wasn&rsquo;t specified.</p>
+                        <p>A Boolean value indicating whether to use the detailed logging format when a user logging format is not
+specified.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">details</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">details</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span></code></pre>
 
                         </div>
                       </div>
@@ -142,9 +161,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC12HeliumLogger12HeliumLogger12fullFilePathSb"></a>
+                    <a name="/s:12HeliumLoggerAAC12fullFilePathSbv"></a>
                     <a name="//apple_ref/swift/Property/fullFilePath" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC12HeliumLogger12HeliumLogger12fullFilePathSb">fullFilePath</a>
+                    <a class="token" href="#/s:12HeliumLoggerAAC12fullFilePathSbv">fullFilePath</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -152,14 +171,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>If true, use the full file path, not just the filename.</p>
+                        <p>A Boolean value indicating whether to use the full file path, or just the filename.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">fullFilePath</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">fullFilePath</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span></code></pre>
 
                         </div>
                       </div>
@@ -169,9 +188,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC12HeliumLogger12HeliumLogger6formatGSqSS_"></a>
+                    <a name="/s:12HeliumLoggerAAC6formatSSSgv"></a>
                     <a name="//apple_ref/swift/Property/format" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC12HeliumLogger12HeliumLogger6formatGSqSS_">format</a>
+                    <a class="token" href="#/s:12HeliumLoggerAAC6formatSSSgv">format</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -179,15 +198,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>If not nil, specifies the user specified logging format.
-For example: <q>[(%date)] [(%type)] [(%file):(%line) (%func)] (%msg)</q></p>
+                        <p>The user specified logging format, if <code>format</code> is not <code>nil</code>.</p>
+
+<p>For example: <q>[(%date)] [(%type)] [(%file):(%line) (%func)] (%msg)</q>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">format</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">format</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -197,9 +217,9 @@ For example: <q>[(%date)] [(%type)] [(%file):(%line) (%func)] (%msg)</q></p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC12HeliumLogger12HeliumLogger10dateFormatGSqSS_"></a>
+                    <a name="/s:12HeliumLoggerAAC10dateFormatSSSgv"></a>
                     <a name="//apple_ref/swift/Property/dateFormat" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC12HeliumLogger12HeliumLogger10dateFormatGSqSS_">dateFormat</a>
+                    <a class="token" href="#/s:12HeliumLoggerAAC10dateFormatSSSgv">dateFormat</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -207,15 +227,14 @@ For example: <q>[(%date)] [(%type)] [(%file):(%line) (%func)] (%msg)</q></p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>If not nil, specifies the format used when adding the date and the time to the
-logged messages</p>
+                        <p>The format used when adding the date and time to logged messages, if <code>dateFormat</code> is not <code>nil</code>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">dateFormat</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">dateFormat</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -225,9 +244,9 @@ logged messages</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC12HeliumLogger12HeliumLogger8timeZoneGSqV10Foundation8TimeZone_"></a>
+                    <a name="/s:12HeliumLoggerAAC8timeZone10Foundation04TimeD0VSgv"></a>
                     <a name="//apple_ref/swift/Property/timeZone" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC12HeliumLogger12HeliumLogger8timeZoneGSqV10Foundation8TimeZone_">timeZone</a>
+                    <a class="token" href="#/s:12HeliumLoggerAAC8timeZone10Foundation04TimeD0VSgv">timeZone</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -235,14 +254,14 @@ logged messages</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>If not nil, specifies the timezone used in the date time format</p>
+                        <p>The timezone used in the date time format, if <code>timeZone</code> is not <code>nil</code>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">timeZone</span><span class="p">:</span> <span class="kt">TimeZone</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">timeZone</span><span class="p">:</span> <span class="kt">TimeZone</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -252,9 +271,9 @@ logged messages</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:ZvC12HeliumLogger12HeliumLogger17defaultDateFormatSS"></a>
+                    <a name="/s:12HeliumLoggerAAC17defaultDateFormatSSvZ"></a>
                     <a name="//apple_ref/swift/Variable/defaultDateFormat" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZvC12HeliumLogger12HeliumLogger17defaultDateFormatSS">defaultDateFormat</a>
+                    <a class="token" href="#/s:12HeliumLoggerAAC17defaultDateFormatSSvZ">defaultDateFormat</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -262,14 +281,14 @@ logged messages</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>default date format - ISO 8601</p>
+                        <p>Default date format - ISO 8601.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">defaultDateFormat</span> <span class="o">=</span> <span class="s">"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">defaultDateFormat</span> <span class="o">=</span> <span class="s">"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"</span></code></pre>
 
                         </div>
                       </div>
@@ -279,9 +298,9 @@ logged messages</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:ZFC12HeliumLogger12HeliumLogger3useFO9LoggerAPI17LoggerMessageTypeT_"></a>
+                    <a name="/s:12HeliumLoggerAAC3usey0B3API0B11MessageTypeOFZ"></a>
                     <a name="//apple_ref/swift/Method/use(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZFC12HeliumLogger12HeliumLogger3useFO9LoggerAPI17LoggerMessageTypeT_">use(_:)</a>
+                    <a class="token" href="#/s:12HeliumLoggerAAC3usey0B3API0B11MessageTypeOFZ">use(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -290,16 +309,25 @@ logged messages</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Create a <code>HeliumLogger</code> instance and set it up as the logger used by the <code>LoggerAPI</code>
-protocol.
-- Parameter type: The most detailed message type (<code>LoggerMessageType</code>) to see in the
-                 output of the logger. Defaults to <code>verbose</code>.</p>
+ protocol.</p>
+<h3 id='usage-example' class='heading'>Usage Example:</h3>
+
+<p>In the default case, the logger is set up to log <code>verbose</code> level messages and all levels below,
+ that is, it will show messages of type <code>verbose</code>, <code>info</code>, <code>warning</code> and <code>error</code>.</p>
+<pre class="highlight swift"><code><span class="kt">HeliumLogger</span><span class="o">.</span><span class="nf">use</span><span class="p">()</span>
+</code></pre>
+
+<p>In the following example, the logger is set up to log <code>warning</code> level messages and all levels below, i.e.
+ it will show messages of type <code>warning</code> and <code>error</code>.</p>
+<pre class="highlight swift"><code><span class="kt">HeliumLogger</span><span class="o">.</span><span class="nf">use</span><span class="p">(</span><span class="o">.</span><span class="n">warning</span><span class="p">)</span>
+</code></pre>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">use</span><span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">LoggerMessageType</span> <span class="o">=</span> <span class="o">.</span><span class="n">verbose</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">use</span><span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">LoggerMessageType</span> <span class="o">=</span> <span class="o">.</span><span class="n">verbose</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -315,8 +343,8 @@ protocol.
                               </td>
                               <td>
                                 <div>
-                                  <p>The most detailed message type (<code>LoggerMessageType</code>) to see in the output of the logger. Defaults to <code>verbose</code>.</p>
-
+                                  <p>The most detailed message type (<code>LoggerMessageType</code>) to see in the
+              output of the logger. Defaults to <code>verbose</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -329,9 +357,9 @@ protocol.
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC12HeliumLogger12HeliumLoggercFO9LoggerAPI17LoggerMessageTypeS0_"></a>
+                    <a name="/s:12HeliumLoggerAACAB0B3API0B11MessageTypeOcfc"></a>
                     <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC12HeliumLogger12HeliumLoggercFO9LoggerAPI17LoggerMessageTypeS0_">init(_:)</a>
+                    <a class="token" href="#/s:12HeliumLoggerAACAB0B3API0B11MessageTypeOcfc">init(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -339,21 +367,14 @@ protocol.
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Create a <code>HeliumLogger</code> instance</p>
-
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter type: The most detailed message type (<code>LoggerMessageType</code>) to see in the
-             output of the logger.
-
-</div>
+                        <p>Create a <code>HeliumLogger</code> instance.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span> <span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">LoggerMessageType</span> <span class="o">=</span> <span class="o">.</span><span class="n">verbose</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span> <span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">LoggerMessageType</span> <span class="o">=</span> <span class="o">.</span><span class="n">verbose</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -369,8 +390,8 @@ protocol.
                               </td>
                               <td>
                                 <div>
-                                  <p>The most detailed message type (<code>LoggerMessageType</code>) to see in the output of the logger.</p>
-
+                                  <p>The most detailed message type (<code>LoggerMessageType</code>) to see in the
+             output of the logger. Defaults to <code>verbose</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -387,9 +408,9 @@ protocol.
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC12HeliumLogger12HeliumLogger3logFTO9LoggerAPI17LoggerMessageType3msgSS12functionNameSS7lineNumSi8fileNameSS_T_"></a>
+                    <a name="/s:12HeliumLoggerAAC3logy0B3API0B11MessageTypeO_SS3msgSS12functionNameSi7lineNumSS04fileI0tF"></a>
                     <a name="//apple_ref/swift/Method/log(_:msg:functionName:lineNum:fileName:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC12HeliumLogger12HeliumLogger3logFTO9LoggerAPI17LoggerMessageType3msgSS12functionNameSS7lineNumSi8fileNameSS_T_">log(_:msg:functionName:lineNum:fileName:)</a>
+                    <a class="token" href="#/s:12HeliumLoggerAAC3logy0B3API0B11MessageTypeO_SS3msgSS12functionNameSi7lineNumSS04fileI0tF">log(_:msg:functionName:lineNum:fileName:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -399,45 +420,13 @@ protocol.
                       <div class="abstract">
                         <p>Output a logged message.</p>
 
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter type: The type of the message (<code>LoggerMessageType</code>) being logged.
-
-</div>
-
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter msg: The mesage to be logged
-
-</div>
-
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter functionName: The name of the function invoking the logger API.
-
-</div>
-
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter lineNum: The line in the source code of the function invoking the
-                logger API.
-
-</div>
-
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter fileName: The file of the source code of the function invoking the
-                 logger API.
-
-</div>
-
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">log</span><span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">LoggerMessageType</span><span class="p">,</span> <span class="nv">msg</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">functionName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">lineNum</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">fileName</span><span class="p">:</span> <span class="kt">String</span> <span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">log</span><span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">LoggerMessageType</span><span class="p">,</span> <span class="nv">msg</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                <span class="nv">functionName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">lineNum</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">fileName</span><span class="p">:</span> <span class="kt">String</span> <span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -454,7 +443,6 @@ protocol.
                               <td>
                                 <div>
                                   <p>The type of the message (<code>LoggerMessageType</code>) being logged.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -466,8 +454,7 @@ protocol.
                               </td>
                               <td>
                                 <div>
-                                  <p>The mesage to be logged</p>
-
+                                  <p>The message to be logged.</p>
                                 </div>
                               </td>
                             </tr>
@@ -480,7 +467,6 @@ protocol.
                               <td>
                                 <div>
                                   <p>The name of the function invoking the logger API.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -492,8 +478,8 @@ protocol.
                               </td>
                               <td>
                                 <div>
-                                  <p>The line in the source code of the function invoking the logger API.</p>
-
+                                  <p>The line in the source code of the function invoking the
+                logger API.</p>
                                 </div>
                               </td>
                             </tr>
@@ -505,8 +491,8 @@ protocol.
                               </td>
                               <td>
                                 <div>
-                                  <p>The file of the source code of the function invoking the logger API.</p>
-
+                                  <p>The file containing the source code of the function invoking the
+                 logger API.</p>
                                 </div>
                               </td>
                             </tr>
@@ -519,9 +505,9 @@ protocol.
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC12HeliumLogger12HeliumLogger9isLoggingFO9LoggerAPI17LoggerMessageTypeSb"></a>
+                    <a name="/s:12HeliumLoggerAAC9isLoggingSb0B3API0B11MessageTypeOF"></a>
                     <a name="//apple_ref/swift/Method/isLogging(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC12HeliumLogger12HeliumLogger9isLoggingFO9LoggerAPI17LoggerMessageTypeSb">isLogging(_:)</a>
+                    <a class="token" href="#/s:12HeliumLoggerAAC9isLoggingSb0B3API0B11MessageTypeOF">isLogging(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -529,31 +515,50 @@ protocol.
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A function that will indicate if a message with a specified type (<code>LoggerMessageType</code>)
-will be outputed in the log (i.e. will not be filtered out).</p>
+                        <p>Indicates if a message with a specified type (<code>LoggerMessageType</code>) will be in the logger
+ output (i.e. will not be filtered out).</p>
+<h3 id='usage-example' class='heading'>Usage Example:</h3>
 
-<p>-Parameter type: The type of message that one wants to know if it will be output in the log.</p>
-
-<div class="aside aside-returns">
-    <p class="aside-title">Returns</p>
-    A Bool indicating whether, if true, or not a message of the specified type
-      (<code>LoggerMessageType</code>) would be output.
-
-</div>
+<p>The logger is set up to log <code>warning</code> level messages and all levels below, that is, it will
+ show messages of type <code>warning</code> and <code>error</code>. This means a <code>verbose</code> level message will not be displayed.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">logger</span> <span class="o">=</span> <span class="kt">HeliumLogger</span><span class="p">(</span><span class="o">.</span><span class="n">warning</span><span class="p">)</span>
+<span class="kt">Log</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logger</span>
+<span class="n">logger</span><span class="o">.</span><span class="nf">isLogging</span><span class="p">(</span><span class="o">.</span><span class="n">warning</span><span class="p">)</span> <span class="c1">// Returns true</span>
+<span class="n">logger</span><span class="o">.</span><span class="nf">isLogging</span><span class="p">(</span><span class="o">.</span><span class="n">verbose</span><span class="p">)</span> <span class="c1">// Returns false</span>
+</code></pre>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">isLogging</span><span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">LoggerMessageType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">isLogging</span><span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">LoggerMessageType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
                       <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The type of message (<code>LoggerMessageType</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
                         <h4>Return Value</h4>
-                        <p>A Bool indicating whether, if true, or not a message of the specified type (<code>LoggerMessageType</code>) would be output.</p>
-
+                        <p>A Boolean indicating whether a message of the specified type
+       (<code>LoggerMessageType</code>) will be in the logger output.</p>
                       </div>
                     </section>
                   </div>
@@ -566,8 +571,8 @@ will be outputed in the log (i.e. will not be filtered out).</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2017-01-26)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2018-06-08)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>
