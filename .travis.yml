@@ -35,7 +35,10 @@ matrix:
     - os: osx
       osx_image: xcode9.4
       sudo: required
-      env: JAZZY_ELIGIBLE=true
+      env: SWIFT_SNAPSHOT=4.1.2 JAZZY_ELIGIBLE=true
+    - os: osx
+      osx_image: xcode10
+      sudo: required
 
 before_install:
   - git clone https://github.com/IBM-Swift/Package-Builder.git
