@@ -1,3 +1,5 @@
+// swift-tools-version:4.2
+
 /**
  * Copyright IBM Corporation 2016, 2017
  *
@@ -19,6 +21,6 @@ import PackageDescription
 let package = Package(
     name: "HeliumLogger",
     dependencies: [
-        .Package(url: "https://github.com/IBM-Swift/LoggerAPI.git", majorVersion: 1, minor: 7),
+        .package(url: "https://github.com/IBM-Swift/LoggerAPI.git", from: "1.7.3")
     ]
 )
