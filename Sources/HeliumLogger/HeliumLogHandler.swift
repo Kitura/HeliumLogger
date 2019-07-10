@@ -34,9 +34,7 @@ public extension HeliumLogger {
         return HeliumLogHandler(label: label, logger: self)
     }
     
-    private static let defaultLogger: HeliumLogger = {
-        return HeliumLogger()
-    }()
+    private static let defaultLogger = HeliumLogger()
     
     /// Creates a `HeliumLogHandler` instance for use with the SwiftLog logging system.
     ///
