@@ -96,11 +96,11 @@ class TestSwiftLog: XCTestCase {
     func testValueSemantics() {
         var logger1 = Logger(label: "first logger")
         logger1.logLevel = .debug
-        logger1[metadataKey: "only-on"] = "first"
+        logger1[metadataKey: "only-on"] = .string("first")
         
         var logger2 = logger1
         logger2.logLevel = .error
-        logger2[metadataKey: "only-on"] = "second"
+        logger2[metadataKey: "only-on"] = .string("second")
         
         logger1.debug("This is a debug")
         logger2.debug("THIS SHOULD NOT BE RENDERED")
@@ -108,8 +108,8 @@ class TestSwiftLog: XCTestCase {
         
         XCTAssertEqual(.debug, logger1.logLevel)
         XCTAssertEqual(.error, logger2.logLevel)
-        XCTAssertEqual("first", logger1[metadataKey: "only-on"])
-        XCTAssertEqual("second", logger2[metadataKey: "only-on"])
+        XCTAssertEqual(.string("first"), logger1[metadataKey: "only-on"])
+        XCTAssertEqual(.string("second"), logger2[metadataKey: "only-on"])
     }
 
 }
