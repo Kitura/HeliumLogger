@@ -46,9 +46,13 @@ public enum HeliumLoggerFormatValues: String {
     case logType = "(%type)"
     /// The time and date at which the message was logged.
     case date = "(%date)"
+    /// The logging metadata used by SwiftLog.
+    case metadata = "(%metadata)"
+    /// The label of the logger used by SwiftLog.
+    case label = "(%label)"
 
     static let All: [HeliumLoggerFormatValues] = [
-        .message, .function, .line, .file, .logType, .date
+        .message, .function, .line, .file, .logType, .date, .metadata, .label
     ]
 }
 
@@ -71,6 +75,14 @@ public class HeliumLogger {
     /// A Boolean value indicating whether to use the detailed logging format when a user logging format is not
     /// specified.
     public var details: Bool = true
+    
+    /// A Boolean value indicating whether to include SwiftLog metadata in the logging format when a user
+    /// logging format is not specified.
+    public var includeMetadata: Bool = true
+    
+    /// A Boolean value indicating whether to include SwiftLog label in the logging format when a user
+    /// logging format is not specified.
+    public var includeLabel: Bool = true
 
     /// A Boolean value indicating whether to use the full file path, or just the filename.
     public var fullFilePath: Bool = false
@@ -259,6 +271,12 @@ extension HeliumLogger : Logger {
 
     func formatEntry(type: LoggerMessageType, msg: String,
                      functionName: String, lineNum: Int, fileName: String) -> String {
+        return formatEntry(type: "\(type)", label: nil, msg: msg, metadata: nil, color: type.color,
+                           functionName: functionName, lineNum: lineNum, fileName: fileName)
+    }
+
+    func formatEntry(type: String, label: String?, msg: String, metadata: String?, color: TerminalColor,
+                     functionName: String, lineNum: Int, fileName: String) -> String {
 
         let message: String
         if let formatter = customFormatter {
@@ -274,7 +292,7 @@ extension HeliumLogger : Logger {
                     case .date:
                         value = formatDate()
                     case .logType:
-                        value = type.description
+                        value = type
                     case .file:
                         value = getFile(fileName)
                     case .line:
@@ -283,30 +301,42 @@ extension HeliumLogger : Logger {
                         value = functionName
                     case .message:
                         value = msg
+                    case .metadata:
+                        value = metadata ?? ""
+                    case .label:
+                        value = label ?? ""
                     }
                 }
 
                 line.append(value)
             }
             message = line
-        } else if details {
-            message = "[\(formatDate())] [\(type)] [\(getFile(fileName)):\(lineNum) \(functionName)] \(msg)"
         } else {
-            message = "[\(formatDate())] [\(type)] \(msg)"
+            var segments = [String]()
+            
+            segments.append("[\(formatDate())]")
+            
+            if includeLabel, let label = label {
+                segments.append("[\(label)]")
+            }
+            
+            segments.append("[\(type)]")
+            
+            if includeMetadata, let metadata = metadata {
+                segments.append("[\(metadata)]")
+            }
+            
+            if details {
+                segments.append("[\(getFile(fileName)):\(lineNum) \(functionName)]")
+            }
+            
+            segments.append(msg)
+            
+            message = segments.joined(separator: " ")            
         }
 
         guard colored else {
             return message
-        }
-
-        let color : TerminalColor
-        switch type {
-        case .warning:
-            color = .yellow
-        case .error:
-            color = .red
-        default:
-            color = .foreground
         }
 
         return color.rawValue + message + TerminalColor.foreground.rawValue
@@ -349,5 +379,18 @@ extension HeliumLogger : Logger {
     ///           (`LoggerMessageType`) will be in the logger output.
     public func isLogging(_ type: LoggerMessageType) -> Bool {
         return type.rawValue >= self.type.rawValue
+    }
+}
+
+extension LoggerMessageType {
+    var color: TerminalColor {
+        switch self {
+        case .warning:
+            return .yellow
+        case .error:
+            return .red
+        default:
+            return .foreground
+        }
     }
 }

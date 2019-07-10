@@ -173,6 +173,8 @@ class TestLogger : XCTestCase {
 
     func testParseFormatWithNoLiterals() {
         let logSegments: [HeliumLogger.LogSegment] = [
+            .token(.label),
+            .token(.metadata),
             .token(.date),
             .token(.logType),
             .token(.file),
@@ -185,6 +187,8 @@ class TestLogger : XCTestCase {
 
     func testParseFormatWithRepeatedTokens() {
         let logSegments: [HeliumLogger.LogSegment] = [
+            .token(.label),
+            .token(.metadata),
             .token(.date),
             .token(.file),
             .token(.date),
