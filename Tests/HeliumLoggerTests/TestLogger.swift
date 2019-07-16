@@ -47,6 +47,8 @@ class TestLogger : XCTestCase {
                     ("testParseFormatWithNoLiterals", testParseFormatWithNoLiterals),
                     ("testParseFormatWithRepeatedTokens", testParseFormatWithRepeatedTokens),
                     ("testLogSegmentEquality", testLogSegmentEquality),
+                    ("testSwiftLogLogSegmentEquality", testSwiftLogLogSegmentEquality),
+                    ("testUniqueLogFormatRawValues", testUniqueLogFormatRawValues),
                     ("testGetFile", testGetFile),
                     ("testFormatDates", testFormatDates),
                     ("testFormatEntries", testFormatEntries)
@@ -173,8 +175,8 @@ class TestLogger : XCTestCase {
 
     func testParseFormatWithNoLiterals() {
         let logSegments: [HeliumLogger.LogSegment] = [
-            .token(.label),
-            .token(.metadata),
+            .swiftLogToken(.label),
+            .swiftLogToken(.metadata),
             .token(.date),
             .token(.logType),
             .token(.file),
@@ -187,8 +189,8 @@ class TestLogger : XCTestCase {
 
     func testParseFormatWithRepeatedTokens() {
         let logSegments: [HeliumLogger.LogSegment] = [
-            .token(.label),
-            .token(.metadata),
+            .swiftLogToken(.label),
+            .swiftLogToken(.metadata),
             .token(.date),
             .token(.file),
             .token(.date),
@@ -207,6 +209,8 @@ class TestLogger : XCTestCase {
                 format.append(literal)
             case .token(let token):
                 format.append(token.rawValue)
+            case .swiftLogToken(let token):
+                format.append(token.rawValue)
             }
         }
 
@@ -224,6 +228,24 @@ class TestLogger : XCTestCase {
         XCTAssertEqual(literal1, literal2)
         XCTAssertEqual(token1, token2)
         XCTAssertNotEqual(literal1, token1)
+    }
+    
+    func testSwiftLogLogSegmentEquality() {
+        let labelEnum = HeliumLoggerSwiftLogFormatValues.label
+        let literal1 = HeliumLogger.LogSegment.literal(labelEnum.rawValue)
+        let literal2 = HeliumLogger.LogSegment.literal("(%label)")
+        let token1 = HeliumLogger.LogSegment.swiftLogToken(labelEnum)
+        let token2 = HeliumLogger.LogSegment.swiftLogToken(HeliumLoggerSwiftLogFormatValues(rawValue: labelEnum.rawValue)!)
+        
+        XCTAssertEqual(literal1, literal2)
+        XCTAssertEqual(token1, token2)
+        XCTAssertNotEqual(literal1, token1)
+    }
+    
+    func testUniqueLogFormatRawValues() {
+        let standardFormatRawValues = Set(HeliumLoggerFormatValues.All.map { $0.rawValue })
+        let swiftLogFormatRawValues = Set(HeliumLoggerSwiftLogFormatValues.All.map { $0.rawValue })
+        XCTAssert(standardFormatRawValues.isDisjoint(with: swiftLogFormatRawValues))
     }
 
     func testGetFile() {

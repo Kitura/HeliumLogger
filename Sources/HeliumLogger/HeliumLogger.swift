@@ -46,13 +46,22 @@ public enum HeliumLoggerFormatValues: String {
     case logType = "(%type)"
     /// The time and date at which the message was logged.
     case date = "(%date)"
+    
+    static let All: [HeliumLoggerFormatValues] = [
+        .message, .function, .line, .file, .logType, .date
+    ]
+}
+
+/// The additional set of substitution "variables" that can be used when formatting the
+/// messages to be logged with SwiftLog.
+public enum HeliumLoggerSwiftLogFormatValues: String {
     /// The logging metadata used by SwiftLog.
     case metadata = "(%metadata)"
     /// The label of the logger used by SwiftLog.
     case label = "(%label)"
-
-    static let All: [HeliumLoggerFormatValues] = [
-        .message, .function, .line, .file, .logType, .date, .metadata, .label
+    
+    static let All: [HeliumLoggerSwiftLogFormatValues] = [
+        .metadata, .label
     ]
 }
 
@@ -89,7 +98,7 @@ public class HeliumLogger {
 
     /// The user specified logging format, if `format` is not `nil`.
     ///
-    /// For example: "[(%date)] [(%type)] [(%file):(%line) (%func)] (%msg)".
+    /// For example: "[(%date)] [(%label)] [(%type)] [(%file):(%line) (%func)] (%msg)".
     public var format: String? {
         didSet {
             if let format = self.format {
@@ -152,11 +161,14 @@ public class HeliumLogger {
 
     enum LogSegment: Equatable {
         case token(HeliumLoggerFormatValues)
+        case swiftLogToken(HeliumLoggerSwiftLogFormatValues)
         case literal(String)
 
         static func == (lhs: LogSegment, rhs: LogSegment) -> Bool {
             switch (lhs, rhs) {
             case (.token(let lhsToken), .token(let rhsToken)) where lhsToken == rhsToken:
+                return true
+            case (.swiftLogToken(let lhsToken), .swiftLogToken(let rhsToken)) where lhsToken == rhsToken:
                 return true
             case (.literal(let lhsLiteral), .literal(let rhsLiteral)) where lhsLiteral == rhsLiteral:
                 return true
@@ -193,6 +205,8 @@ public class HeliumLogger {
             loc = match.range.location + match.range.length
             if let formatValue = HeliumLoggerFormatValues(rawValue: segment) {
                 logSegments.append(LogSegment.token(formatValue))
+            } else if let swiftLogFormatValue = HeliumLoggerSwiftLogFormatValues(rawValue: segment) {
+                logSegments.append(LogSegment.swiftLogToken(swiftLogFormatValue))
             } else {
                 logSegments.append(LogSegment.literal(segment))
             }
@@ -301,6 +315,9 @@ extension HeliumLogger : Logger {
                         value = functionName
                     case .message:
                         value = msg
+                    }
+                case .swiftLogToken(let token):
+                    switch token {
                     case .metadata:
                         value = metadata ?? ""
                     case .label:
