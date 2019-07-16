@@ -17,7 +17,7 @@
 import Foundation
 import Logging
 
-public extension HeliumLogger {
+extension HeliumLogger {
     
     /// Creates a `HeliumLogHandler` instance for use with the SwiftLog logging system.
     ///
@@ -30,7 +30,7 @@ public extension HeliumLogger {
     ///LoggingSystem.bootstrap(heliumLogger.makeLogHandler)
     ///```
     /// - Parameter label: The label to use for a SwiftLog `Logger`.
-    func makeLogHandler(label: String) -> HeliumLogHandler {
+    public func makeLogHandler(label: String) -> HeliumLogHandler {
         return HeliumLogHandler(label: label, logger: self)
     }
     
@@ -46,7 +46,7 @@ public extension HeliumLogger {
     ///LoggingSystem.bootstrap(HeliumLogger.makeLogHandler)
     ///```
     /// - Parameter label: The label to use for a SwiftLog `Logger`.
-    static func makeLogHandler(label: String) -> HeliumLogHandler {
+    public static func makeLogHandler(label: String) -> HeliumLogHandler {
         return HeliumLogHandler(label: label, logger: defaultLogger)
     }
 }
