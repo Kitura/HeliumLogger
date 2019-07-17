@@ -47,7 +47,7 @@ public enum HeliumLoggerFormatValues: String {
     /// The time and date at which the message was logged.
     case date = "(%date)"
     
-    static let All: [HeliumLoggerFormatValues] = [
+    static let all: [HeliumLoggerFormatValues] = [
         .message, .function, .line, .file, .logType, .date
     ]
 }
@@ -60,7 +60,7 @@ public enum HeliumLoggerSwiftLogFormatValues: String {
     /// The label of the logger used by SwiftLog.
     case label = "(%label)"
     
-    static let All: [HeliumLoggerSwiftLogFormatValues] = [
+    static let all: [HeliumLoggerSwiftLogFormatValues] = [
         .metadata, .label
     ]
 }

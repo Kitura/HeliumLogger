@@ -76,9 +76,9 @@ extension HeliumLogger {
 
 /// A lightweight implementation of SwiftLog's `LogHandler` protocol.
 public struct HeliumLogHandler: LogHandler {
-    public var logger: HeliumLogger
+    private let logger: HeliumLogger
     
-    public let label: String
+    private let label: String
     
     public var logLevel: Logger.Level = .info
     

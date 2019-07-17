@@ -243,8 +243,8 @@ class TestLogger : XCTestCase {
     }
     
     func testUniqueLogFormatRawValues() {
-        let standardFormatRawValues = Set(HeliumLoggerFormatValues.All.map { $0.rawValue })
-        let swiftLogFormatRawValues = Set(HeliumLoggerSwiftLogFormatValues.All.map { $0.rawValue })
+        let standardFormatRawValues = Set(HeliumLoggerFormatValues.all.map { $0.rawValue })
+        let swiftLogFormatRawValues = Set(HeliumLoggerSwiftLogFormatValues.all.map { $0.rawValue })
         XCTAssert(standardFormatRawValues.isDisjoint(with: swiftLogFormatRawValues))
     }
 
