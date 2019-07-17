@@ -19,8 +19,7 @@ import HeliumLogger
 import Logging
 
 let isLoggingConfigured: Bool = {
-    let heliumLogger = HeliumLogger()
-    LoggingSystem.bootstrap(heliumLogger.makeLogHandler)
+    HeliumLogger.bootstrapSwiftLog()
     return true
 }()
 

@@ -19,6 +19,29 @@ import Logging
 
 extension HeliumLogger {
     
+    /// A one-time configuration function to bootstrap the SwiftLog logging system
+    /// using `HeliumLogger` as the logging backend.
+    ///
+    ///### Usage Example: ###
+    /// This bootstraps the SwiftLog logging system with a default
+    /// `HeliumLogger` instance. The default `HeliumLogger` instance will
+    /// be used as the logging backend for SwiftLog.
+    ///```swift
+    ///HeliumLogger.bootstrapSwiftLog()
+    ///```
+    ///
+    /// It's also possible to customize the default `HeliumLogger` instance using a configuration closure.
+    ///```swift
+    ///HeliumLogger.bootstrapSwiftLog { heliumLogger in
+    ///    heliumLogger.colored = true
+    ///}
+    ///```
+    /// - Parameter configure: An optional closure that may be used to configure the default `HeliumLogger` instance.
+    public static func bootstrapSwiftLog(_ configure: ((HeliumLogger) -> Void)? = nil) {
+        configure?(defaultLogger)
+        LoggingSystem.bootstrap(HeliumLogger.makeLogHandler)
+    }
+    
     /// Creates a `HeliumLogHandler` instance for use with the SwiftLog logging system.
     ///
     ///### Usage Example: ###
