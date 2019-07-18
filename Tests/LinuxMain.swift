@@ -62,4 +62,5 @@ extension Sequence {
 XCTMain([
     testCase(TestLogger.allTests.shuffled()),
     testCase(TestStreamLogger.allTests.shuffled()),
+    testCase(TestSwiftLog.allTests.shuffled()),
     ].shuffled())

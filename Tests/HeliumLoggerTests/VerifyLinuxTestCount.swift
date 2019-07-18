@@ -34,6 +34,11 @@
             linuxCount = TestStreamLogger.allTests.count
             darwinCount = Int(TestStreamLogger.defaultTestSuite().testCaseCount)
             XCTAssertEqual(linuxCount, darwinCount, "\(darwinCount - linuxCount) tests are missing from TestStreamLogger.allTests")
+            
+            // TestSwiftLog
+            linuxCount = TestSwiftLog.allTests.count
+            darwinCount = Int(TestSwiftLog.defaultTestSuite().testCaseCount)
+            XCTAssertEqual(linuxCount, darwinCount, "\(darwinCount - linuxCount) tests are missing from TestSwiftLog.allTests")
         }
     }
 #endif

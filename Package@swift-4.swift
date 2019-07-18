@@ -29,6 +29,9 @@ let package = Package(
         )
     ],
     dependencies: [
+        // Note: Syntax to allow compatibility with both Swift 4 and Swift 5 projects.
+        // See: https://github.com/apple/swift-log#help-i-need-swift-4
+        .package(url: "https://github.com/apple/swift-log.git", Version("0.0.0") ..< Version("2.0.0")),
         .package(url: "https://github.com/IBM-Swift/LoggerAPI.git", from: "1.7.0")
     ],
     targets: [
@@ -36,7 +39,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "HeliumLogger",
-            dependencies: ["LoggerAPI"]),
+            dependencies: ["Logging", "LoggerAPI"]),
         .testTarget(
             name: "HeliumLoggerTests",
             dependencies: ["HeliumLogger"])
