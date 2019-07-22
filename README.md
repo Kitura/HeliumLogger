@@ -23,13 +23,14 @@
 
 # HeliumLogger
 
-Provides a lightweight Swift logging framework which supports logging to standard output.
+Provides a lightweight logging implementation for Swift which logs to standard output.
 
 ## Features
 
 - Logs output to stdout by default. You can change the output stream, see example usage for [`HeliumStreamLogger.use(_:outputStream:)`](http://ibm-swift.github.io/HeliumLogger/Classes/HeliumStreamLogger.html#use).
 - Different logging levels such as Warning, Verbose, and Error
-  Enable/disable color output to terminal 
+- Enable/disable color output to terminal 
+- Support for the [IBM-Swift `LoggerAPI`](https://github.com/IBM-Swift/LoggerAPI) and [Swift-log `Logging`](https://github.com/apple/swift-log) logging APIs.
 
 ## Usage
 
@@ -48,14 +49,22 @@ Add `HeliumLogger` to your target's dependencies:
 ```
 #### Import packages
 
+To use with LoggerAPI:
+
 ```swift
 import HeliumLogger
 import LoggerAPI
 ```
 
+To use with swift-log:
+```swift
+import HeliumLogger
+import Logging
+```
+
 #### Initialize HeliumLogger
 
-Initialize an instance of `HeliumLogger`. Set it as the logger used by `LoggerAPI`.
+To use HeliumLogger as a logging backend for LoggerAPI:
 
 ```swift
 let logger = HeliumLogger()
@@ -66,6 +75,19 @@ or, if you don't need to customize `HeliumLogger`:
 ```swift
 HeliumLogger.use()
 ```
+
+To use HeliumLogger as a logging backend for swift-log:
+
+```swift
+let logger = HeliumLogger()
+LoggingSystem.bootstrap(logger.makeLogHandler)
+```
+
+Or, as a convenience:
+```swift
+HeliumLogger.bootstrapSwiftLog()
+```
+
 
 #### Logging levels
 
@@ -91,15 +113,17 @@ In this example, the logger will only show messages of type `warning` and `error
 HeliumLogger.use(.warning)
 ```
 
-#### Adjust logging levels at runtime
+Note that when HeliumLogger is used in conjunction with swift-log, the logging level is determined by the `Logger`, and HeliumLogger's own logging level is unused.
+
+#### Adjust logging levels at runtime (LoggerAPI)
 
 Calling `HeliumLogger.use(LoggerMessageType)` will set the `LoggerAPI` to use this new HeliumLogger instance. If in a route you detect an error with your application, you could use this to dynamically increase the log level.
 
 This new instance will not have any customization which you applied to other instances (see list item 7).
 
-#### Logging messages
+#### Logging messages (LoggerAPI)
 
-How to use HeliumLogger to log messages in your application:
+How to use HeliumLogger to log messages in your application with LoggerAPI:
 ```swift
 Log.verbose("This is a verbose log message.")
 
