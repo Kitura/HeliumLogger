@@ -67,7 +67,18 @@
                 <a class="nav-group-task-link" href="Enums/HeliumLoggerFormatValues.html">HeliumLoggerFormatValues</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/HeliumLoggerSwiftLogFormatValues.html">HeliumLoggerSwiftLogFormatValues</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/TerminalColor.html">TerminalColor</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/HeliumLogHandler.html">HeliumLogHandler</a>
               </li>
             </ul>
           </li>
@@ -85,8 +96,8 @@
 </p>
 
 <p align="center">
-    <a href="https://www.kitura.io/">
-    <img src="https://img.shields.io/badge/docs-kitura.io-1FBCE4.svg" alt="Docs">
+    <a href="https://ibm-swift.github.io/HeliumLogger/index.html">
+    <img src="https://img.shields.io/badge/apidoc-HeliumLogger-1FBCE4.svg?style=flat" alt="APIDoc">
     </a>
     <a href="https://travis-ci.org/IBM-Swift/HeliumLogger">
     <img src="https://travis-ci.org/IBM-Swift/HeliumLogger.svg?branch=master" alt="Build Status - Master">
@@ -101,12 +112,14 @@
 </p>
 <h1 id='heliumlogger' class='heading'>HeliumLogger</h1>
 
-<p>Provides a lightweight Swift logging framework which supports logging to standard output.</p>
+<p>Provides a lightweight logging implementation for Swift which logs to standard output.</p>
 <h2 id='features' class='heading'>Features</h2>
 
 <ul>
+<li>Logs output to stdout by default. You can change the output stream, see example usage for <a href="http://ibm-swift.github.io/HeliumLogger/Classes/HeliumStreamLogger.html#use"><code><a href="Classes/HeliumStreamLogger.html#/s:12HeliumLogger0a6StreamB0C3use_06outputC0y0B3API0B11MessageTypeO_xtFZ">HeliumStreamLogger.use(_:outputStream:)</a></code></a>.</li>
 <li>Different logging levels such as Warning, Verbose, and Error</li>
-<li>Color output to terminal</li>
+<li>Enable/disable color output to terminal</li>
+<li>Support for the <a href="https://github.com/IBM-Swift/LoggerAPI">IBM-Swift <code>LoggerAPI</code></a> and <a href="https://github.com/apple/swift-log">Swift-log <code>Logging</code></a> logging APIs.</li>
 </ul>
 <h2 id='usage' class='heading'>Usage</h2>
 <h4 id='add-dependencies' class='heading'>Add dependencies</h4>
@@ -119,18 +132,34 @@
 <pre class="highlight swift"><code><span class="o">.</span><span class="nf">target</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"example"</span><span class="p">,</span> <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span><span class="s">"HeliumLogger"</span><span class="p">]),</span>
 </code></pre>
 <h4 id='import-packages' class='heading'>Import packages</h4>
+
+<p>To use with LoggerAPI:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">HeliumLogger</span>
 <span class="kd">import</span> <span class="kt">LoggerAPI</span>
 </code></pre>
+
+<p>To use with swift-log:</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">HeliumLogger</span>
+<span class="kd">import</span> <span class="kt">Logging</span>
+</code></pre>
 <h4 id='initialize-heliumlogger' class='heading'>Initialize HeliumLogger</h4>
 
-<p>Initialize an instance of <code><a href="Classes/HeliumLogger.html">HeliumLogger</a></code>. Set it as the logger used by <code>LoggerAPI</code>.</p>
+<p>To use HeliumLogger as a logging backend for LoggerAPI:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">logger</span> <span class="o">=</span> <span class="kt">HeliumLogger</span><span class="p">()</span>
 <span class="kt">Log</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logger</span>
 </code></pre>
 
 <p>or, if you don&rsquo;t need to customize <code><a href="Classes/HeliumLogger.html">HeliumLogger</a></code>:</p>
 <pre class="highlight swift"><code><span class="kt">HeliumLogger</span><span class="o">.</span><span class="nf">use</span><span class="p">()</span>
+</code></pre>
+
+<p>To use HeliumLogger as a logging backend for swift-log:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">logger</span> <span class="o">=</span> <span class="kt">HeliumLogger</span><span class="p">()</span>
+<span class="kt">LoggingSystem</span><span class="o">.</span><span class="nf">bootstrap</span><span class="p">(</span><span class="n">logger</span><span class="o">.</span><span class="n">makeLogHandler</span><span class="p">)</span>
+</code></pre>
+
+<p>Or, as a convenience:</p>
+<pre class="highlight swift"><code><span class="kt">HeliumLogger</span><span class="o">.</span><span class="nf">bootstrapSwiftLog</span><span class="p">()</span>
 </code></pre>
 <h4 id='logging-levels' class='heading'>Logging levels</h4>
 
@@ -156,14 +185,16 @@
 <p>In this example, the logger will only show messages of type <code>warning</code> and <code>error</code>:</p>
 <pre class="highlight swift"><code><span class="kt">HeliumLogger</span><span class="o">.</span><span class="nf">use</span><span class="p">(</span><span class="o">.</span><span class="n">warning</span><span class="p">)</span>
 </code></pre>
-<h4 id='adjust-logging-levels-at-runtime' class='heading'>Adjust logging levels at runtime</h4>
+
+<p>Note that when HeliumLogger is used in conjunction with swift-log, the logging level is determined by the <code>Logger</code>, and HeliumLogger&rsquo;s own logging level is unused.</p>
+<h4 id='adjust-logging-levels-at-runtime-loggerapi' class='heading'>Adjust logging levels at runtime (LoggerAPI)</h4>
 
 <p>Calling <code>HeliumLogger.use(LoggerMessageType)</code> will set the <code>LoggerAPI</code> to use this new HeliumLogger instance. If in a route you detect an error with your application, you could use this to dynamically increase the log level.</p>
 
 <p>This new instance will not have any customization which you applied to other instances (see list item 7).</p>
-<h4 id='logging-messages' class='heading'>Logging messages</h4>
+<h4 id='logging-messages-loggerapi' class='heading'>Logging messages (LoggerAPI)</h4>
 
-<p>How to use HeliumLogger to log messages in your application:</p>
+<p>How to use HeliumLogger to log messages in your application with LoggerAPI:</p>
 <pre class="highlight swift"><code><span class="kt">Log</span><span class="o">.</span><span class="nf">verbose</span><span class="p">(</span><span class="s">"This is a verbose log message."</span><span class="p">)</span>
 
 <span class="kt">Log</span><span class="o">.</span><span class="nf">info</span><span class="p">(</span><span class="s">"This is an informational log message."</span><span class="p">)</span>
@@ -211,8 +242,8 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2018-06-08)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2019-07-22)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

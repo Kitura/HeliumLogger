@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>HeliumLoggerFormatValues Enumeration Reference</title>
+    <title>HeliumLogHandler Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Enum/HeliumLoggerFormatValues" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Struct/HeliumLogHandler" class="dashAnchor"></a>
 
-    <a title="HeliumLoggerFormatValues Enumeration Reference"></a>
+    <a title="HeliumLogHandler Structure Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -44,7 +44,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">HeliumLogger Reference</a>
       <img class="carat" src="../img/carat.png" />
-      HeliumLoggerFormatValues Enumeration Reference
+      HeliumLogHandler Structure Reference
     </p>
 
     <div class="content-wrapper">
@@ -89,15 +89,14 @@
 
         <section class="section">
           <div class="section-content">
-            <h1>HeliumLoggerFormatValues</h1>
+            <h1>HeliumLogHandler</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">HeliumLoggerFormatValues</span> <span class="p">:</span> <span class="kt">String</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">HeliumLogHandler</span> <span class="p">:</span> <span class="kt">LogHandler</span></code></pre>
 
                 </div>
               </div>
-            <p>The set of substitution <q>variables</q> that can be used when formatting the
-messages to be logged.</p>
+            <p>A lightweight implementation of SwiftLog&rsquo;s <code>LogHandler</code> protocol.</p>
 
           </div>
         </section>
@@ -109,9 +108,9 @@ messages to be logged.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12HeliumLogger0aB12FormatValuesO7messageyA2CmF"></a>
-                    <a name="//apple_ref/swift/Element/message" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12HeliumLogger0aB12FormatValuesO7messageyA2CmF">message</a>
+                    <a name="/s:7Logging10LogHandlerP8logLevelAA6LoggerV0E0Ovp"></a>
+                    <a name="//apple_ref/swift/Property/logLevel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Logging10LogHandlerP8logLevelAA6LoggerV0E0Ovp">logLevel</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -119,14 +118,13 @@ messages to be logged.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The message being logged.</p>
-
+                        
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"(%msg)"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">logLevel</span><span class="p">:</span> <span class="kt">Logger</span><span class="o">.</span><span class="kt">Level</span></code></pre>
 
                         </div>
                       </div>
@@ -136,9 +134,9 @@ messages to be logged.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12HeliumLogger0aB12FormatValuesO8functionyA2CmF"></a>
-                    <a name="//apple_ref/swift/Element/function" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12HeliumLogger0aB12FormatValuesO8functionyA2CmF">function</a>
+                    <a name="/s:7Logging10LogHandlerP8metadataSDySSAA6LoggerV13MetadataValueOGvp"></a>
+                    <a name="//apple_ref/swift/Property/metadata" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Logging10LogHandlerP8metadataSDySSAA6LoggerV13MetadataValueOGvp">metadata</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -146,14 +144,13 @@ messages to be logged.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The name of the function invoking the logger API.</p>
-
+                        
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">function</span> <span class="o">=</span> <span class="s">"(%func)"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">metadata</span><span class="p">:</span> <span class="kt">Logger</span><span class="o">.</span><span class="kt">Metadata</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -163,9 +160,9 @@ messages to be logged.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12HeliumLogger0aB12FormatValuesO4lineyA2CmF"></a>
-                    <a name="//apple_ref/swift/Element/line" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12HeliumLogger0aB12FormatValuesO4lineyA2CmF">line</a>
+                    <a name="/s:7Logging10LogHandlerP11metadataKeyAA6LoggerV13MetadataValueOSgSS_tcip"></a>
+                    <a name="//apple_ref/swift/Method/subscript(metadataKey:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Logging10LogHandlerP11metadataKeyAA6LoggerV13MetadataValueOSgSS_tcip">subscript(metadataKey:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -173,14 +170,13 @@ messages to be logged.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The line in the source code of the function invoking the logger API.</p>
-
+                        
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">line</span> <span class="o">=</span> <span class="s">"(%line)"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">subscript</span><span class="p">(</span><span class="n">metadataKey</span> <span class="nv">metadataKey</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Logger</span><span class="o">.</span><span class="kt">Metadata</span><span class="o">.</span><span class="kt">Value</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -190,9 +186,9 @@ messages to be logged.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12HeliumLogger0aB12FormatValuesO4fileyA2CmF"></a>
-                    <a name="//apple_ref/swift/Element/file" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12HeliumLogger0aB12FormatValuesO4fileyA2CmF">file</a>
+                    <a name="/s:7Logging10LogHandlerP3log5level7message8metadata4file8function4lineyAA6LoggerV5LevelO_AL7MessageVSDySSAL13MetadataValueOGSgS2SSutF"></a>
+                    <a name="//apple_ref/swift/Method/log(level:message:metadata:file:function:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Logging10LogHandlerP3log5level7message8metadata4file8function4lineyAA6LoggerV5LevelO_AL7MessageVSDySSAL13MetadataValueOGSgS2SSutF">log(level:message:metadata:file:function:line:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -200,68 +196,13 @@ messages to be logged.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The file containing the source code of the function invoking the logger API.</p>
-
+                        
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">file</span> <span class="o">=</span> <span class="s">"(%file)"</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:12HeliumLogger0aB12FormatValuesO7logTypeyA2CmF"></a>
-                    <a name="//apple_ref/swift/Element/logType" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12HeliumLogger0aB12FormatValuesO7logTypeyA2CmF">logType</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The type of the logged message (i.e. error, warning, etc.).</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">logType</span> <span class="o">=</span> <span class="s">"(%type)"</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:12HeliumLogger0aB12FormatValuesO4dateyA2CmF"></a>
-                    <a name="//apple_ref/swift/Element/date" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12HeliumLogger0aB12FormatValuesO4dateyA2CmF">date</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The time and date at which the message was logged.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">date</span> <span class="o">=</span> <span class="s">"(%date)"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">log</span><span class="p">(</span><span class="nv">level</span><span class="p">:</span> <span class="kt">Logger</span><span class="o">.</span><span class="kt">Level</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="kt">Logger</span><span class="o">.</span><span class="kt">Message</span><span class="p">,</span> <span class="nv">metadata</span><span class="p">:</span> <span class="kt">Logger</span><span class="o">.</span><span class="kt">Metadata</span><span class="p">?,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
