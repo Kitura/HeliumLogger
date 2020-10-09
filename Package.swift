@@ -32,7 +32,7 @@ let package = Package(
         // Note: Syntax to allow compatibility with both Swift 4 and Swift 5 projects.
         // See: https://github.com/apple/swift-log#help-i-need-swift-4
         .package(url: "https://github.com/apple/swift-log.git", Version("0.0.0") ..< Version("2.0.0")),
-        .package(url: "https://github.com/Kitura/LoggerAPI.git", from: "1.7.0")
+        .package(url: "https://github.com/Kitura/LoggerAPI.git", from: "1.9.200")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
