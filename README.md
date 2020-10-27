@@ -9,10 +9,10 @@
     <a href="https://ibm-swift.github.io/HeliumLogger/index.html">
     <img src="https://img.shields.io/badge/apidoc-HeliumLogger-1FBCE4.svg?style=flat" alt="APIDoc">
     </a>
-    <a href="https://travis-ci.org/IBM-Swift/HeliumLogger">
-    <img src="https://travis-ci.org/IBM-Swift/HeliumLogger.svg?branch=master" alt="Build Status - Master">
+    <a href="https://travis-ci.org/Kitura/HeliumLogger">
+    <img src="https://travis-ci.org/Kitura/HeliumLogger.svg?branch=master" alt="Build Status - Master">
     </a>
-    <img src="https://codecov.io/gh/IBM-Swift/HeliumLogger/branch/master/graph/badge.svg" alt="codecov">
+    <img src="https://codecov.io/gh/Kitura/HeliumLogger/branch/master/graph/badge.svg" alt="codecov">
     <img src="https://img.shields.io/badge/os-macOS-green.svg?style=flat" alt="macOS">
     <img src="https://img.shields.io/badge/os-linux-green.svg?style=flat" alt="Linux">
     <img src="https://img.shields.io/badge/license-Apache2-blue.svg?style=flat" alt="Apache 2">
@@ -30,16 +30,16 @@ Provides a lightweight logging implementation for Swift which logs to standard o
 - Logs output to stdout by default. You can change the output stream, see example usage for [`HeliumStreamLogger.use(_:outputStream:)`](http://ibm-swift.github.io/HeliumLogger/Classes/HeliumStreamLogger.html#use).
 - Different logging levels such as Warning, Verbose, and Error
 - Enable/disable color output to terminal 
-- Support for the [IBM-Swift `LoggerAPI`](https://github.com/IBM-Swift/LoggerAPI) and [Swift-log `Logging`](https://github.com/apple/swift-log) logging APIs.
+- Support for the [Kitura `LoggerAPI`](https://github.com/Kitura/LoggerAPI) and [Swift-log `Logging`](https://github.com/apple/swift-log) logging APIs.
 
 ## Usage
 
 #### Add dependencies
 
-Add the `HeliumLogger` package to the dependencies within your application’s `Package.swift` file. Substitute `"x.x.x"` with the latest `HeliumLogger` [release](https://github.com/IBM-Swift/HeliumLogger/releases).
+Add the `HeliumLogger` package to the dependencies within your application’s `Package.swift` file. Substitute `"x.x.x"` with the latest `HeliumLogger` [release](https://github.com/Kitura/HeliumLogger/releases).
 
 ```swift
-.package(url: "https://github.com/IBM-Swift/HeliumLogger.git", from: "x.x.x")
+.package(url: "https://github.com/Kitura/HeliumLogger.git", from: "x.x.x")
 ```
 
 Add `HeliumLogger` to your target's dependencies:
@@ -161,7 +161,7 @@ public var timeZone: TimeZone?
 
 ## API documentation
 
-For more information visit our [API reference](http://ibm-swift.github.io/HeliumLogger/).
+For more information visit our [API reference](http://kitura.github.io/HeliumLogger/).
 
 ## Community
 
@@ -169,4 +169,4 @@ We love to talk server-side Swift, and Kitura. Join our [Slack](http://swift-at-
 
 ## License
 
-This library is licensed under Apache 2.0. Full license text is available in [LICENSE](https://github.com/IBM-Swift/HeliumLogger/blob/master/LICENSE.txt).
+This library is licensed under Apache 2.0. Full license text is available in [LICENSE](https://github.com/Kitura/HeliumLogger/blob/master/LICENSE.txt).
