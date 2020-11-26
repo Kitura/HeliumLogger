@@ -33,7 +33,7 @@
       </p>
     
         <p class="header-col header-col--secondary">
-          <a class="header-link" href="https://github.com/IBM-Swift/HeliumLogger/">
+          <a class="header-link" href="https://github.com/Kitura/HeliumLogger/">
             <img class="header-icon" src="../img/gh.png"/>
             View on GitHub
           </a>
@@ -88,10 +88,11 @@
       <article class="main-content">
 
         <section class="section">
-          <div class="section-content">
+          <div class="section-content top-matter">
             <h1>HeliumLogHandler</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">HeliumLogHandler</span> <span class="p">:</span> <span class="kt">LogHandler</span></code></pre>
 
                 </div>
@@ -162,7 +163,7 @@
                     <code>
                     <a name="/s:7Logging10LogHandlerP11metadataKeyAA6LoggerV13MetadataValueOSgSS_tcip"></a>
                     <a name="//apple_ref/swift/Method/subscript(metadataKey:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Logging10LogHandlerP11metadataKeyAA6LoggerV13MetadataValueOSgSS_tcip">subscript(metadataKey:)</a>
+                    <a class="token" href="#/s:7Logging10LogHandlerP11metadataKeyAA6LoggerV13MetadataValueOSgSS_tcip">subscript(metadataKey:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -188,7 +189,7 @@
                     <code>
                     <a name="/s:7Logging10LogHandlerP3log5level7message8metadata4file8function4lineyAA6LoggerV5LevelO_AL7MessageVSDySSAL13MetadataValueOGSgS2SSutF"></a>
                     <a name="//apple_ref/swift/Method/log(level:message:metadata:file:function:line:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Logging10LogHandlerP3log5level7message8metadata4file8function4lineyAA6LoggerV5LevelO_AL7MessageVSDySSAL13MetadataValueOGSgS2SSutF">log(level:message:metadata:file:function:line:)</a>
+                    <a class="token" href="#/s:7Logging10LogHandlerP3log5level7message8metadata4file8function4lineyAA6LoggerV5LevelO_AL7MessageVSDySSAL13MetadataValueOGSgS2SSutF">log(level:<wbr>message:<wbr>metadata:<wbr>file:<wbr>function:<wbr>line:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -202,7 +203,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">log</span><span class="p">(</span><span class="nv">level</span><span class="p">:</span> <span class="kt">Logger</span><span class="o">.</span><span class="kt">Level</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="kt">Logger</span><span class="o">.</span><span class="kt">Message</span><span class="p">,</span> <span class="nv">metadata</span><span class="p">:</span> <span class="kt">Logger</span><span class="o">.</span><span class="kt">Metadata</span><span class="p">?,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">deprecated</span><span class="p">,</span> <span class="nv">renamed</span><span class="p">:</span> <span class="s">"log(level:message:metadata:source:file:function:line:﹚"</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">log</span><span class="p">(</span><span class="nv">level</span><span class="p">:</span> <span class="kt">Logger</span><span class="o">.</span><span class="kt">Level</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="kt">Logger</span><span class="o">.</span><span class="kt">Message</span><span class="p">,</span> <span class="nv">metadata</span><span class="p">:</span> <span class="kt">Logger</span><span class="o">.</span><span class="kt">Metadata</span><span class="p">?,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -217,8 +219,8 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2019-07-22)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external">IBM &amp; Kitura Project Contributors</a>. All rights reserved. (Last updated: 2020-11-25)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>
