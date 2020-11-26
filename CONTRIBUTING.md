@@ -1,4 +1,4 @@
-# Contributing to IBM-Swift
+# Contributing to Kitura
 
 We welcome contributions, and request you follow these guidelines.
 
@@ -16,6 +16,8 @@ A good bug report is one that make it easy for us to understand what you were
 trying to do and what went wrong. Provide as much context as possible so we can try to recreate the issue.
 
 ### Contributor License Agreement
+
+*Note*: Updates to CLA are coming now that Kitura is a community run project.
 
 In order for us to accept pull-requests, the contributor must first complete
 a Contributor License Agreement (CLA). Please see our [CLA repo](http://github.com/IBM-Swift/CLA) for more information.
