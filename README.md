@@ -1,12 +1,12 @@
 <p align="center">
     <a href="http://kitura.io/">
-        <img src="https://raw.githubusercontent.com/IBM-Swift/Kitura/master/Sources/Kitura/resources/kitura-bird.svg?sanitize=true" height="100" alt="Kitura">
+        <img src="https://raw.githubusercontent.com/Kitura/Kitura/master/Sources/Kitura/resources/kitura-bird.svg?sanitize=true" height="100" alt="Kitura">
     </a>
 </p>
 
 
 <p align="center">
-    <a href="https://ibm-swift.github.io/HeliumLogger/index.html">
+    <a href="https://kitura.github.io/HeliumLogger/index.html">
     <img src="https://img.shields.io/badge/apidoc-HeliumLogger-1FBCE4.svg?style=flat" alt="APIDoc">
     </a>
     <a href="https://travis-ci.org/Kitura/HeliumLogger">
@@ -27,7 +27,7 @@ Provides a lightweight logging implementation for Swift which logs to standard o
 
 ## Features
 
-- Logs output to stdout by default. You can change the output stream, see example usage for [`HeliumStreamLogger.use(_:outputStream:)`](http://ibm-swift.github.io/HeliumLogger/Classes/HeliumStreamLogger.html#use).
+- Logs output to stdout by default. You can change the output stream, see example usage for [`HeliumStreamLogger.use(_:outputStream:)`](http://kitura.github.io/HeliumLogger/Classes/HeliumStreamLogger.html#use).
 - Different logging levels such as Warning, Verbose, and Error
 - Enable/disable color output to terminal 
 - Support for the [Kitura `LoggerAPI`](https://github.com/Kitura/LoggerAPI) and [Swift-log `Logging`](https://github.com/apple/swift-log) logging APIs.

@@ -1,6 +1,6 @@
 module: HeliumLogger
-author: IBM
-github_url: https://github.com/IBM-Swift/HeliumLogger/
+author: IBM & Kitura Project Contributors
+github_url: https://github.com/Kitura/HeliumLogger/
 
 theme: fullwidth
 clean: true
@@ -10,6 +10,4 @@ readme: README.md
 
 skip_undocumented: false
 hide_documentation_coverage: false
-
-xcodebuild_arguments: [-project, HeliumLogger.xcodeproj, -target, HeliumLogger, LIBRARY_SEARCH_PATHS=.build/debug]
 
